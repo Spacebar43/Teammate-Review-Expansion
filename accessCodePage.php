@@ -26,6 +26,9 @@ hr {
     <div id="codeEntry" class="w3-section w3-center">
       <input placeholder="Enter access code here" name ='accessCodeEntryText' id="accessCodeEntryText" class="w3-input w3-light-grey" type="text" pattern="^[a-zA-Z0-9]*$" required>
       <hr>
+	  <label for="adminCheckbox">Login as faculty:</label>
+	  <input type='checkbox' id="adminCheckbox">
+	  <hr>
       <input type='submit' id="accessCodeEntryButton" class="w3-center w3-button w3-theme-dark" value='Access Peer Evaluation'></input>
       <h2>If your code is older than 15 minutes, click here to get a new one.</h2>
       <input type='button' onclick="window.location.href = 'index.php';" class="w3-center w3-button w3-theme-dark" value="Dont have a valid code?"/></input>
@@ -40,7 +43,8 @@ ini_set("display_errors", "1"); // shows all errors
 ini_set("log_errors", 1);
 ini_set("error_log", "~/php-error.log");
 
-session_start();
+session_start(); //begin recording user data in user's browser
+
 require "lib/database.php";
 $con = connectToDatabase();
 
