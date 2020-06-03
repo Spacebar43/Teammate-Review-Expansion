@@ -5,6 +5,9 @@ function connectToDatabase()
 //login to sql
 //Change this to your connection info.
 $DATABASE_HOST = 'tethys.cse.buffalo.edu';
+// Currently using my ubit name, had to change my cheshire mysql passowrd so I didnt expose my own.
+// It may be prudent to see if Hertz can set us up with a team database user credential.
+// --Salapadakey, slgreco@buffalo.edu, 5:22pm
 $DATABASE_USER = 'slgreco';
 $DATABASE_PASS = 'mysqlsofly';
 $DATABASE_NAME = 'cse442_542_2020_summer_teama_db';
