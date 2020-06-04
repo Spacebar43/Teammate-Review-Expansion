@@ -35,6 +35,8 @@ hr {
     <div id="loginEmailEntry" class="w3-section">
       <input placeholder="ubitname@buffalo.edu" name ='loginEmailEntryText' id="loginEmailEntryText" class="w3-input w3-light-grey" type="email" pattern="^[a-zA-Z0-9]+@buffalo.edu$" required>
       <hr>
+      <input type='checkbox' name="faculty_check"><label for="faculty_check">Faculty Log-in?</label>
+      <hr>
       <input type='submit' id="loginEmailEntryButton" class="w3-center w3-button w3-theme-dark" value='Get Verification Code'></input>
       <hr>
       <input type='button' onclick="window.location.href = 'accessCodePage.php';" class="w3-center w3-button w3-theme-dark" value="Already have valid code?"/></input>
@@ -57,10 +59,11 @@ $con = connectToDatabase();
 if(isset($_POST['loginEmailEntryText']) && !empty($_POST['loginEmailEntryText']) ) {
   $email = $_POST['loginEmailEntryText'];
 
-	//check if student is enrolled
+    if(!isset($_POST['faculty_check'])){ 
+        //check if student is enrolled
 	$stmt = $con->prepare('SELECT email from students WHERE email=?');
-  $stmt->bind_param('s',$email);
-  $stmt->execute();
+        $stmt->bind_param('s',$email);
+        $stmt->execute();
 	$stmt->bind_result($flag);
 	$stmt->store_result();
 	$stmt->fetch();
@@ -71,6 +74,24 @@ if(isset($_POST['loginEmailEntryText']) && !empty($_POST['loginEmailEntryText'])
 		$stmt->close();
 		exit();
 	}
+    }
+    else{
+        //check if faculty is enrolled
+	$stmt = $con->prepare('SELECT email from faculty WHERE email=?');
+        $stmt->bind_param('s',$email);
+        $stmt->execute();
+	$stmt->bind_result($flag);
+	$stmt->store_result();
+	$stmt->fetch();
+	if($stmt->num_rows == 0){
+		echo '<script language="javascript">';
+    echo 'alert("Email was not found in the list of faculty. Please contact the sysadmin.")';
+    echo '</script>';
+		$stmt->close();
+		exit();
+	}
+    }
+
 
   $expiration_time = time()+ 60 * 15;
   //update passcode and timestamp

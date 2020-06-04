@@ -5,9 +5,9 @@ function connectToDatabase()
 //login to sql
 //Change this to your connection info.
 $DATABASE_HOST = 'tethys.cse.buffalo.edu';
-$DATABASE_USER = 'FIXME';
-$DATABASE_PASS = 'FIXME';
-$DATABASE_NAME = 'FIXME';
+$DATABASE_USER = 'trcerny';
+$DATABASE_PASS = '50040569';
+$DATABASE_NAME = 'cse442_542_2020_summer_teama_db';
 // Try and connect using the info above.
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 try {
