@@ -162,6 +162,7 @@ if(empty($_POST['p'])) {
       header("Location: emailConfirmation.php"); /* Redirect browser to a test link*/
   exit();
   }
+}
 ?>
 <hr>
 </div>
