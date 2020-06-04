@@ -52,14 +52,12 @@ CREATE TABLE `eval` (
 
 -- faculty table
 -- each row defines a single instructor who could use this system?
--- FIXME: THIS TABLE WAS NEVER USED AND MAY NEED TO BE REDONE
 CREATE TABLE `faculty` (
- `id` int(11) NOT NULL AUTO_INCREMENT,
- `name` varchar(255) NOT NULL,
- `password` varchar(250) NOT NULL,
- `email` varchar(100) NOT NULL,
- PRIMARY KEY (`id`),
- UNIQUE KEY `username` (`name`)
+ `faculty_id` int(11) NOT NULL AUTO_INCREMENT,
+ `email` varchar(20) NOT NULL,
+ `name` text NOT NULL,
+ PRIMARY KEY (`faculty_id`),
+ UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB;
 
 -- reviewers TABLE
@@ -107,6 +105,20 @@ CREATE TABLE `student_login` (
  UNIQUE KEY `email` (`email`,`password`),
  CONSTRAINT `student_login_email_constraint` FOREIGN KEY (`email`) REFERENCES `students` (`email`)
 ) ENGINE=InnoDB;
+
+-- faculty_login TABLE
+-- each row represents a faculty member being able to login to the system. this is used to support the 2-step login approach
+-- that relies on UBIT to provide the necessary requirements under FERPA (o W o)
+CREATE TABLE `faculty_login` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `email` varchar(50) NOT NULL,
+ `password` varchar(50) NOT NULL,
+ `expiration_time` int(50) NOT NULL,
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `email` (`email`,`password`),
+ CONSTRAINT `faculty_login_email_constraint` FOREIGN KEY (`email`) REFERENCES `faculty` (`email`)
+) ENGINE=InnoDB;
+
 
 -- FUTURE EXPANSION OPTION
 -- these tables were created so that we can allow faculty to tailor the questions & answers with each survey
