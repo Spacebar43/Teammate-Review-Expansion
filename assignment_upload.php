@@ -7,7 +7,6 @@ if(!isset($surveyID)){
     $surveyID = $_SESSION['surveyid'];
 }
 // TODO: Change "Import" to actual name of button handler.
-// TODO: Verify that the error should popup on admin.php.
     if(isset($_POST["Import"])){
         $filename=$_FILES["file"]["tmp_name"];
         if($_FILES["file"]["size"] > 0)
@@ -23,13 +22,13 @@ if(!isset($surveyID)){
                 {
                     echo "<script type=\"text/javascript\">
                         alert (\"Invalid File: Please Upload CSV File.\");
-                        window.location = \"admin.php\"
+                        window.location = \"adminHome.php\"
                         </script>";
                 }
                 else{
                     echo"<script type=\"text/javascript\">
                     alert (\"CSV File has been successfully Imported.\");
-                    window.location = \"admin.php\"
+                    window.location = \"adminHome.php\"
                     </script>";
                 }
             }
