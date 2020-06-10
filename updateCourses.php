@@ -55,6 +55,7 @@ hr {
     </div>
   </form>
 
+<hr>
 <?php
 //error logging
 error_reporting(-1); // reports all errors
@@ -67,9 +68,7 @@ require "lib/random.php";
 require "lib/database.php";
 require "lib/constants.php";
 $con = connectToDatabase();
-
-
-<div></div>
+?>
 <hr>
 
 <!-- Footer -->
