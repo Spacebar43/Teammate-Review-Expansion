@@ -112,11 +112,11 @@ if(empty($_POST['p'])) {
   }
 
 } else {
-
+ 
   if(isset($_POST['loginEmailEntryText']) && !empty($_POST['loginEmailEntryText']) ) {
   $email = $_POST['loginEmailEntryText'];
 
-	//check if student is enrolled
+	//check if faculty is enrolled
 	$stmt = $con->prepare('SELECT email from faculty WHERE email=?');
   $stmt->bind_param('s',$email);
   $stmt->execute();
