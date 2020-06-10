@@ -15,7 +15,7 @@ if(!isset($surveyID)){
             $file = fopen($filename, "r");
             while(($getData = fgetcsv($file, 10000, ",")) !== FALSE)
             {
-                $sql = "INSERT into reviews (survey_id,reviewer_email,teammate_email) values
+                $sql = "INSERT into reviewers (survey_id,reviewer_email,teammate_email) values
                 ('".$surveyID."','".$getData[0]."','".$getData[1]."')";
                 $result = mysqli_query($con, $sql);
 
