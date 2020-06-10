@@ -133,7 +133,7 @@ if(empty($_POST['p'])) {
 
   $expiration_time = time()+ 60 * 15;
   //update passcode and timestamp
-  $stmt = $con->prepare('UPDATE student_login SET expiration_time =? WHERE email=?');
+  $stmt = $con->prepare('UPDATE faculty_login SET expiration_time =? WHERE email=?');
   $stmt->bind_param('is', $expiration_time, $email);
   $stmt->execute();
   if($stmt->affected_rows == 0){
