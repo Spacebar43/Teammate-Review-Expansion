@@ -27,7 +27,7 @@ hr {
       <input placeholder="Enter access code here" name ='accessCodeEntryText' id="accessCodeEntryText" class="w3-input w3-light-grey" type="text" pattern="^[a-zA-Z0-9]*$" required>
       <hr>
 	  <label for="adminCheckbox">Login as faculty:</label>
-	  <input type='checkbox' id="adminCheckbox">
+	  <input type='checkbox' id="adminCheckbox" name='adminCheck'>
 	  <hr>
       <input type='submit' id="accessCodeEntryButton" class="w3-center w3-button w3-theme-dark" value='Access Peer Evaluation'></input>
       <h2>If your code is older than 15 minutes, click here to get a new one.</h2>
@@ -49,49 +49,96 @@ require "lib/database.php";
 $con = connectToDatabase();
 
 if(isset($_POST['accessCodeEntryText']) && !empty($_POST['accessCodeEntryText'])){
-	$code = $_POST['accessCodeEntryText'];
-	$stmt= $con->prepare('SELECT * FROM student_login WHERE password=?');
-	$stmt->bind_param('s',$code);
-	$stmt->execute();
-	$stmt->store_result();
-	if($stmt->num_rows == 0){
-    echo '<script language="javascript">';
-    echo 'alert("Code not found! Please check that you have typed the code correctly, or get a new one.")';
-    echo '</script>';
-		$stmt->close();
-		exit();
-	}
-	$time = time();
+	if(empty($_POST['adminCheck'])){
+      $code = $_POST['accessCodeEntryText'];
+	  $stmt= $con->prepare('SELECT * FROM student_login WHERE password=?');
+	  $stmt->bind_param('s',$code);
+	  $stmt->execute();
+	  $stmt->store_result();
+	  if($stmt->num_rows == 0){
+          echo '<script language="javascript">';
+          echo 'alert("Code not found! Please check that you have typed the code correctly, or get a new one.")';
+          echo '</script>';
+	  	$stmt->close();
+	  	exit();
+	  }
+	  $time = time();
 
-	$stmt = $con->prepare('SELECT id, email FROM student_login WHERE password=? AND expiration_time > ?');
-	$stmt->bind_param('si',$code,$time);
-	$stmt->execute();
-	$stmt->store_result();
-	if($stmt->num_rows == 0){
-    echo '<script language="javascript">';
-    echo 'alert("Your access code has expired, please get a new code.")';
-    echo '</script>';
-		$stmt->close();
-		exit();
-	}
-	$stmt->bind_result($id,$email);
-	$stmt->fetch();
+	  $stmt = $con->prepare('SELECT id, email FROM student_login WHERE password=? AND expiration_time > ?');
+	  $stmt->bind_param('si',$code,$time);
+	  $stmt->execute();
+	  $stmt->store_result();
+	  if($stmt->num_rows == 0){
+          echo '<script language="javascript">';
+          echo 'alert("Your access code has expired, please get a new code.")';
+          echo '</script>';
+	  	$stmt->close();
+	  	exit();
+	  }
+	  $stmt->bind_result($id,$email);
+	  $stmt->fetch();
 
-	$stmt = $con->prepare('SELECT student_ID FROM students WHERE email=?');
-  $stmt->bind_param('s', $email);
-  $stmt->execute();
-	$stmt->bind_result($student_ID);
-	$stmt->store_result();
-	$stmt->fetch();
+	  $stmt = $con->prepare('SELECT student_ID FROM students WHERE email=?');
+      $stmt->bind_param('s', $email);
+      $stmt->execute();
+	  $stmt->bind_result($student_ID);
+	  $stmt->store_result();
+	  $stmt->fetch();
 
-	session_regenerate_id();
-	$_SESSION['loggedin'] = TRUE;
-	$_SESSION['email'] = $email;
-	$_SESSION['id'] = $id;
-	$_SESSION['student_ID'] =$student_ID;
-	$stmt->close();
-	header("Location: courseSelect.php");
-	exit();
+	  session_regenerate_id();
+	  $_SESSION['loggedin'] = TRUE;
+	  $_SESSION['email'] = $email;
+	  $_SESSION['id'] = $id;
+	  $_SESSION['student_ID'] =$student_ID;
+	  $stmt->close();
+	  header("Location: courseSelect.php");
+	  exit();
+    }
+    else{
+	  $code = $_POST['accessCodeEntryText'];
+	  $stmt= $con->prepare('SELECT * FROM faculty_login WHERE password=?');
+	  $stmt->bind_param('s',$code);
+	  $stmt->execute();
+	  $stmt->store_result();
+	  if($stmt->num_rows == 0){
+          echo '<script language="javascript">';
+          echo 'alert("Code not found! Please check that you have typed the code correctly, or get a new one.")';
+          echo '</script>';
+	  	$stmt->close();
+	  	exit();
+	  }
+	  $time = time();
+
+	  $stmt = $con->prepare('SELECT id, email FROM faculty_login WHERE password=? AND expiration_time > ?');
+	  $stmt->bind_param('si',$code,$time);
+	  $stmt->execute();
+	  $stmt->store_result();
+	  if($stmt->num_rows == 0){
+          echo '<script language="javascript">';
+          echo 'alert("Your access code has expired, please get a new code.")';
+          echo '</script>';
+	  	$stmt->close();
+	  	exit();
+	  }
+	  $stmt->bind_result($id,$email);
+	  $stmt->fetch();
+
+	  $stmt = $con->prepare('SELECT faculty_id FROM faculty WHERE email=?');
+      $stmt->bind_param('s', $email);
+      $stmt->execute();
+	  $stmt->bind_result($faculty_id);
+	  $stmt->store_result();
+	  $stmt->fetch();
+
+	  session_regenerate_id();
+	  $_SESSION['loggedin'] = TRUE;
+	  $_SESSION['email'] = $email;
+	  $_SESSION['id'] = $id;
+	  $_SESSION['faculty_id'] =$faculty_id;
+	  $stmt->close();
+	  header("Location: adminHome.php");
+	  exit();
+    }
 }
 ?>
 <hr>
