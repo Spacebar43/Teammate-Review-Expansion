@@ -7,6 +7,7 @@ session_start();
 require "lib/database.php";
 $con = connectToDatabase();
 $surveyID = $_SESSION['surveyid'];
+try{
 if(!isset($surveyID)){
     // No survey ID detected, put in an errorvalue.
     $_SESSION['surveyid'] = 1;
@@ -40,5 +41,11 @@ if(!isset($surveyID)){
                     </script>";
         }
     }
+}catch(Exception $e){
+    echo "<script type=\"text/javascript\">
+    alert (\"CSV is formatted incorrectly or assigned students are not formally enrolled in database.\");
+    window.location = \"adminHome.php\"
+    </script>";
+}
 
 ?>
