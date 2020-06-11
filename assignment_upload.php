@@ -27,7 +27,7 @@ if(!isset($surveyID)){
                 }
                 else{
                     echo"<script type=\"text/javascript\">
-                    alert (\"CSV File has been successfully Imported.\");
+                    alert (\"CSV File has been successfully uploaded.\");
                     window.location = \"adminHome.php\"
                     </script>";
                 }
