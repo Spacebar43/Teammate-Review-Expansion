@@ -57,7 +57,7 @@
 <div id="fileselector" class="w3-row-padding w3-center w3-padding">
   <label for="fs">Choose File: </label>
   <input type="file" id="fs" name="fs" accept=".csv"></input>
-  <input type='submit' class="w3-center w3-button w3-theme-dark btn" name="btn" value="Upload"/></input>
+  <input type='submit' class="w3-center w3-button w3-theme-dark Import" name="Import" value="Upload"/></input>
 <hr>
 </div>
 
