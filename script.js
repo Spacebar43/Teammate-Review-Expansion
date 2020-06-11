@@ -14,7 +14,7 @@ function fvalidator(filename) {
 
 
 $(document).ready(function(){
-    $('.btn').click(function(){
+    $('.Import').click(function(){
 
       var file = document.getElementById("fs");
       if (!fvalidator(file.value)) {
@@ -25,10 +25,10 @@ $(document).ready(function(){
 
 
       var clickBtnValue = $(this).val();
-      var ajax = 'up.php',
+      var ajax = 'assignment_upload.php',
       data =  {'action': clickBtnValue};
       $.post(ajax, data, function (response) {
-          alert("Upload button clicked");
+        
       });
     });
 });
