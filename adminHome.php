@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
 <body>
 <style>
   hr {
@@ -50,7 +52,23 @@
 <header id="header" class="w3-container w3-theme w3-padding">
     <div id="headerContentName"><font class="w3-center w3-theme"><h1>Faculty Control Panel</h1></font></div>
 </header>
+<div class="row">
+  <form class="form-horizontal" action="assignment_upload.php" method="post"
+                name="frmCSVImport" id="frmCSVImport"
+                enctype="multipart/form-data">
+                <div class="input-row">
+                    <label class="col-md-4 control-label">Choose CSV
+                        File</label> <input type="file" name="file"
+                        id="file" accept=".csv">
+                    <button type="submit" id="submit" name="Import"
+                        class="btn-submit">Import</button>
+                    <br />
 
-Going to need to add some stuffs here. Buttons, all that.
+                </div>
+
+            </form>
+
+</div>
+
 </body>
 </html>
