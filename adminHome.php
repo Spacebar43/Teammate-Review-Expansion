@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
 <body>
 <style>
   hr {
@@ -51,6 +53,13 @@
     <div id="headerContentName"><font class="w3-center w3-theme"><h1>Faculty Control Panel</h1></font></div>
 </header>
 
-Going to need to add some stuffs here. Buttons, all that.
+
+<div id="fileselector" class="w3-row-padding w3-center w3-padding">
+  <label for="fs">Choose File: </label>
+  <input type="file" id="fs" name="fs" accept=".csv"></input>
+  <input type='submit' class="w3-center w3-button w3-theme-dark btn" name="btn" value="Upload"/></input>
+<hr>
+</div>
+
 </body>
 </html>

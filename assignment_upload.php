@@ -7,8 +7,8 @@ if(!isset($surveyID)){
     $surveyID = $_SESSION['surveyid'];
 }
 // TODO: Change "Import" to actual name of button handler.
-    if(isset($_POST["Import"])){
-        $filename=$_FILES["file"]["tmp_name"];
+    if(isset($_POST["btn"])){
+        $filename=$_FILES["btn"]["name"];
         if($_FILES["file"]["size"] > 0)
         {
             $file = fopen($filename, "r");
