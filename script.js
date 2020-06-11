@@ -16,19 +16,10 @@ function fvalidator(filename) {
 $(document).ready(function(){
     $('.Import').click(function(){
 
-      var file = document.getElementById("fs");
+      var file = document.getElementById("file");
       if (!fvalidator(file.value)) {
         alert('Wrong File Type!')
         return;
       }
-
-
-
-      var clickBtnValue = $(this).val();
-      var ajax = 'assignment_upload.php',
-      data =  {'action': clickBtnValue};
-      $.post(ajax, data, function (response) {
-        
-      });
     });
 });

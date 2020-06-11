@@ -52,13 +52,22 @@
 <header id="header" class="w3-container w3-theme w3-padding">
     <div id="headerContentName"><font class="w3-center w3-theme"><h1>Faculty Control Panel</h1></font></div>
 </header>
+<div class="row">
+  <form class="form-horizontal" action="assignment_upload.php" method="post"
+                name="frmCSVImport" id="frmCSVImport"
+                enctype="multipart/form-data">
+                <div class="input-row">
+                    <label class="col-md-4 control-label">Choose CSV
+                        File</label> <input type="file" name="file"
+                        id="file" accept=".csv">
+                    <button type="submit" id="submit" name="Import"
+                        class="btn-submit">Import</button>
+                    <br />
 
+                </div>
 
-<div id="fileselector" class="w3-row-padding w3-center w3-padding">
-  <label for="fs">Choose File: </label>
-  <input type="file" id="fs" name="fs" accept=".csv"></input>
-  <input type='submit' class="w3-center w3-button w3-theme-dark Import" name="Import" value="Upload"/></input>
-<hr>
+            </form>
+
 </div>
 
 </body>

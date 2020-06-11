@@ -15,8 +15,8 @@ if(!isset($surveyID)){
 }
 // TODO: Change "Import" to actual name of button handler.
     if(isset($_POST["Import"])){
-        $filename=$_FILES["fs"]["name"];
-        if($_FILES["fs"]["size"] > 2)
+        $filename=$_FILES["file"]["tmp_name"];
+        if($_FILES["file"]["size"] > 2)
         {
             $file = fopen($filename, "r");
             while(($getData = fgetcsv($file, 10000, ",")) !== FALSE)
