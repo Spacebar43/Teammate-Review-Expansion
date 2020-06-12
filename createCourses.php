@@ -64,7 +64,7 @@ hr {
   ini_set("error_log", "~/php-error.log");
 
   session_start();
-  
+
   if(!isset($_SESSION['faculty_id'])) {
     header("Location: ".SITE_HOME."index.php");
     exit();
@@ -79,12 +79,12 @@ hr {
     $sql->bind_param('is', $courseNum, $courseName);
     $sql->execute();
   }
-
-  $courseNum = $_POST['courseNumberEntryText'];
-  $courseName = $_POST['courseNameEntryText'];
-  echo "adding to database!";
-  addCourse($con, $courseNum, $courseName);
-
+  //
+  if(!empty($_POST['courseNumberEntryText']) and !empty($_POST['courseNameEntryText'])) {
+    $courseNum = $_POST['courseNumberEntryText'];
+    $courseName = $_POST['courseNameEntryText'];
+    addCourse($con, $courseNum, $courseName);
+  }
 ?>
 <hr>
 
