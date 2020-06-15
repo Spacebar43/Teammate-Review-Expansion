@@ -82,6 +82,10 @@ hr {
                onclick="window.location.href = 'createCourses.php';"
                class="w3-center w3-button w3-theme-dark"
                value="Create Courses"/></input>
+        <input type='button'
+               onclick="window.location.href = 'surveyCreation.php';"
+               class="w3-center w3-button w3-theme-dark"
+               value="Create Survey"/></input>
 
   </form>
 </div>
@@ -107,8 +111,6 @@ hr {
     </div>
   </form>
 </div>
-
-
 <!-- Footer -->
 <footer id="footer" class="w3-container w3-theme-dark w3-padding-16">
   <h3>Acknowledgements</h3>
