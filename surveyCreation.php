@@ -27,6 +27,18 @@ hr {
 <header id="header" class="w3-container w3-center w3-theme w3-padding">
     <div id="headerContentName"><font color="black"><h1>Create New Survey</h1></font></div>
 </header>
+<div>
+  <form class="w3-container w3-card-4 w3-light-blue"
+        method="post"
+        name="frmCSVImport" id="frmCSVImport"
+        enctype="multipart/form-data">
+
+        <input type='button'
+               onclick="window.location.href = 'adminHome.php';"
+               class="w3-center w3-button w3-theme-dark"
+               value="Return Home"/></input>
+  </form>
+</div>
 <hr>
 
 
@@ -41,31 +53,16 @@ hr {
       <hr>
         <h3>Enter the Start Time of Survey - hh:mm:AM/PM</h3>
       <input name='startDateTimeText' id='startDateTimeTExt' class="w3-input w3-light-grey" type="time" required>
-      <!--
-        This form uses a temporary means of verifying faculty authorization
-        TODO: Use faculty sessions to access this page
-
-      <h4>Confirm your authorization</h4>
-      <input placeholder="Password for this session" name ='facultyPasswordEntryText' id="courseNameEntryText" class="w3-input w3-light-grey" type="text" required>
       <hr>
-      -->
-      <input type='submit' id="createSurveyConfirmButton" class="w3-center w3-button w3-theme-dark" value='Create Course'></input>
+        <h3>Enter the Close Date of Survey</h3>
+      <input name ='closeDateText' id="closeDateText" class="w3-input w3-light-grey" type="date" required>
+      <hr>
+        <h3>Enter the Close Time of Survey - hh:mm:AM/PM</h3>
+      <input name='closeDateTimeText' id='closeDateTimeTExt' class="w3-input w3-light-grey" type="time" required>
+      <input type='submit' id="createSurveyConfirmButton" class="w3-center w3-button w3-theme-dark" value='Create Survey'></input>
       <hr>
     </div>
   </form>
-
-  <div>
-  <form class="w3-container w3-card-4 w3-light-blue"
-        method="post"
-        name="frmCSVImport" id="frmCSVImport"
-        enctype="multipart/form-data">
-
-        <input type='button'
-               onclick="window.location.href = 'adminHome.php';"
-               class="w3-center w3-button w3-theme-dark"
-               value="Return Home"/></input>
-  </form>
-</div>
 
 <hr>
 <?php
