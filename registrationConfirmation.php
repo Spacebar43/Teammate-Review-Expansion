@@ -1,4 +1,5 @@
 <?php
+/*
   error_reporting(-1); // reports all errors
   ini_set("display_errors", "1"); // shows all errors
   ini_set("log_errors", 1);
@@ -9,6 +10,7 @@
     header("Location: ".SITE_HOME."index.php");
     exit();
   }
+  */
 ?>
 
 
@@ -28,8 +30,9 @@
 <header id="header" class="w3-container w3-theme w3-padding">
     <div id="headerContentName"><font class="w3-center w3-theme"><h1>Students registered:</h1></font></div>
 </header>
+
 <?php
-if (isset($_POST['import'])) {
+if (isset($_POST['Import'])) {
   $fileTmp = $_FILES['file']['tmp_name'];
   echo '<pre>';
   echo file_get_contents($fileTmp);
