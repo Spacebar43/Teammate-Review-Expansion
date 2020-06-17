@@ -28,13 +28,14 @@
 <header id="header" class="w3-container w3-theme w3-padding">
     <div id="headerContentName"><font class="w3-center w3-theme"><h1>Students registered:</h1></font></div>
 </header>
-
+<?php
 if (isset($_POST['import'])) {
   $fileTmp = $_FILES['file']['tmp_name'];
   echo '<pre>';
   echo file_get_contents($fileTmp);
   echo '</pre>';
 }
+?>
 
 
 <!-- Footer -->
