@@ -1,6 +1,4 @@
 <?php
-/* TODO un-comment this code when project is done
-        it is commented for dev/test purposes
   error_reporting(-1); // reports all errors
   ini_set("display_errors", "1"); // shows all errors
   ini_set("log_errors", 1);
@@ -13,7 +11,6 @@
     header("Location: ".SITE_HOME."index.php");
     exit();
   }
-*/
 ?>
 
 
