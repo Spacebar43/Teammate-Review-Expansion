@@ -22,6 +22,12 @@ if (isset($_POST['submit'])) {
         print_r('error while uploading file');
         echo '<br>';
     }
+    // alternatively, see if file uploaded successfully
+    if (is_uploaded_file($fileTmpName)) {
+        echo 'file upload success<br>';
+    } else {
+        echo 'file upload fail<br>';
+    } echo '<br>';
 
     // parse file name to check for file extension
     // explode() makes an array
@@ -32,9 +38,16 @@ if (isset($_POST['submit'])) {
     $fileExt = strtolower(end($fileNameArray));
     print_r($fileExt);
     echo '<br>';
-    
     // example check
-    if ($fileExt != 'csv') {print_r("filetype should be .csv");echo '<br>';}
+    if ($fileExt != 'csv') {print_r("filetype should be .csv");echo '<br>'.'<br>';}
 
+    // print contents of a file
+    readfile($fileTmpName);
+    echo '<br>'.'<br>';
+    // similar but the output is a string
+    echo file_get_contents($fileTmpName).'<br>';
+    echo '<pre>'.file_get_contents($fileTmpName).'</pre>'.'<br>'.'<br>'
+
+    // from here, we parse the contents of the string in order to utilize the .csv
     
 }
