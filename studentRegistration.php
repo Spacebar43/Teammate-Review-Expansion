@@ -36,7 +36,7 @@
 
 <div class="w5-row-padding w3-center w3-padding">
    <form class="w3-container w3-card-4 w3-light-blue"
-        action="assignment_upload.php"
+        action="registrationConfirmation.php"
         method="post"
         name="frmCSVImport" id="frmCSVImport"
         enctype="multipart/form-data">

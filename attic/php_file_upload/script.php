@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
     echo '<br>'.'<br>';
     // similar but the output is a string
     echo file_get_contents($fileTmpName).'<br>';
-    echo '<pre>'.file_get_contents($fileTmpName).'</pre>'.'<br>'.'<br>'
+    echo '<pre>'.file_get_contents($fileTmpName).'</pre>'.'<br>'.'<br>';
 
     // from here, we parse the contents of the string in order to utilize the .csv
     
