@@ -29,26 +29,13 @@
     <div id="headerContentName"><font class="w3-center w3-theme"><h1>Students registered:</h1></font></div>
 </header>
 
-<!--<div class="w5-row-padding w3-center w3-padding">
-   <form class="w3-container w3-card-4 w3-light-blue"
-        action="assignment_upload.php"
-        method="post"
-        name="frmCSVImport" id="frmCSVImport"
-        enctype="multipart/form-data">
+if (isset($_POST['import'])) {
+  $fileTmp = $_FILES['file']['tmp_name'];
+  echo '<pre>';
+  echo file_get_contents($fileTmp);
+  echo '</pre>';
+}
 
-    <div class="w3-section">
-         <label class="col-md-4 control-label">Select a .csv file to upload your roster.</label>
-         <hr>
-         <input type="file"
-                name="file" id="file"
-                accept=".csv">
-         <button type="submit"
-                 name="Import" id="submit"
-                 class="btn-submit">Import</button>
-    </div>
-  </form>
-</div>
--->
 
 <!-- Footer -->
 <footer id="footer" class="w3-container w3-theme-dark w3-padding-16">
