@@ -48,25 +48,27 @@ hr {
         <h3>Enter the Course Number</h3>
       <input maxlength="3" placeholder="442" name ='courseNumberEntryText' id="courseNumberEntryText" class="w3-input w3-light-grey" type="text" pattern="[0-9][0-9][0-9]$" required>
       <hr>
+      <h3>Enter the Rubric Name</h3>
+      <input placeholder="testRubric" name ='rubricEntryText' id="rubricEntryText" class="w3-input w3-light-grey" type="text" required>
+      <hr>
         <h3>Enter the Start Date of Survey</h3>
       <input name ='startDateText' id="startDateText" class="w3-input w3-light-grey" type="date" required>
       <hr>
         <h3>Enter the Start Time of Survey - hh:mm:AM/PM</h3>
-      <input name='startDateTimeText' id='startDateTimeTExt' class="w3-input w3-light-grey" type="time" required>
+      <input name='startDateTimeText' id='startDateTimeText' class="w3-input w3-light-grey" type="time" required>
       <hr>
         <h3>Enter the Close Date of Survey</h3>
       <input name ='closeDateText' id="closeDateText" class="w3-input w3-light-grey" type="date" required>
       <hr>
         <h3>Enter the Close Time of Survey - hh:mm:AM/PM</h3>
-      <input name='closeDateTimeText' id='closeDateTimeTExt' class="w3-input w3-light-grey" type="time" required>
+      <input name='closeDateTimeText' id='closeDateTimeText' class="w3-input w3-light-grey" type="time" required>
       <input type='submit' id="createSurveyConfirmButton" class="w3-center w3-button w3-theme-dark" value='Create Survey'></input>
       <hr>
     </div>
   </form>
-
 <hr>
 <?php
-
+  //echo "wat";
   require "lib/constants.php";
 
   //error logging
@@ -77,25 +79,61 @@ hr {
 
   session_start();
 
-  if(!isset($_SESSION['faculty_id'])) {
+  /*if(!isset($_SESSION['faculty_id'])) {
     header("Location: ".SITE_HOME."index.php");
     exit();
-  }
+  }*/
 
   require "lib/database.php";
   $con = connectToDatabase();
 
-  function addCourse ($connection, $courseNum, $courseName) {
+  function addSurvey ($connection, $course_num, $start_date, $expiration_date, $rubric_name) {
     echo "Added to database";
-    $sql = $connection->prepare( 'INSERT INTO course (code,name) values(?,?)' );
-    $sql->bind_param('is', $courseNum, $courseName);
-    $sql->execute();
+    $rubricsql = $connection -> prepare('SELECT id FROM rubrics WHERE name=? limit 1');
+    $rubricsql->bind_param('s', $rubric_name);
+    $rubricsql->execute();
+    $rubricsql->bind_result($rubric_id);
+    $rubricsql->store_result();
+    if($rubricsql->num_rows == 0){
+      echo "The name does not exist in the database.";
+      $rubricsql->close();
+      exit();
+    }
+    echo "Survey exists, fetching...";
+    $rubricsql->fetch();
+    //Rubric ID acquired
+
+    $coursesql = $connection -> prepare('SELECT id FROM course WHERE code=? limit 1');
+    $coursesql->bind_param('i', $course_num);
+    $coursesql->execute();
+    $coursesql->bind_result($course_id);
+    $coursesql->store_result();
+    if($coursesql->num_rows == 0){
+      echo "The course does not exist in the database.";
+      $coursesql->close();
+      exit();
+    }
+    echo "Course exists, fetching...";
+    $coursesql->fetch();
+
+
+    // now actual insertion
+
+    $surveysql = $con -> prepare('INSERT INTO surveys(course_id,start_date,expiration_date,rubric_id) values (?,?,?,?)' );
+    $surveysql->bind_param('issi', $courseID, $start_date, $expiration_date, $rubricID);
+    $surveysql->execute();
   }
-  //
-  if(!empty($_POST['courseNumberEntryText']) and !empty($_POST['courseNameEntryText'])) {
+  if(!empty($_POST['courseNumberEntryText']) and !empty($_POST['startDateText']) and !empty($_POST['startDateTimeText']) and !empty($_POST['closeDateText'])and !empty($_POST['closeDateTimeText']) and !empty($_POST['rubricEntryText']) ) {
     $courseNum = $_POST['courseNumberEntryText'];
-    $courseName = $_POST['courseNameEntryText'];
-    addCourse($con, $courseNum, $courseName);
+    $startDate = $_POST['startDateText'];
+    $startDateTimeText = $_POST['startDateTimeText'];
+    $closeDate = $_POST['closeDateText'];
+    $closeDateTime = $_POST['closeDateTimeText'];
+    $rubric_name_input = $_POST['rubricEntryText'];
+    $openDate = $startDate . " " . $startDateTimeText;
+    $closedDate = $closeDate . " " . $closeDateTime;
+    $openDateObject = date_create_from_format('Y-m-d H:i', $openDate);
+    $closedDateObject = date_create_from_format('Y-m-d H:i', $closedDate);
   }
 ?>
 <hr>
