@@ -95,7 +95,7 @@ hr {
     $rubricsql->bind_result($rubric_id);
     $rubricsql->store_result();
     if($rubricsql->num_rows == 0){
-      echo "The name does not exist in the database.";
+      echo "Error: The rubric name does not exist in the database.";
       $rubricsql->close();
       exit();
     }
@@ -109,7 +109,7 @@ hr {
     $coursesql->bind_result($course_id);
     $coursesql->store_result();
     if($coursesql->num_rows == 0){
-      echo "The course does not exist in the database.";
+      echo "Error: The course does not exist in the database.";
       $coursesql->close();
       exit();
     }
@@ -122,7 +122,7 @@ hr {
     $surveysql = $connection->prepare('INSERT INTO surveys(course_id,start_date,expiration_date,rubric_id) values (?,?,?,?)' );
     $surveysql->bind_param('issi', $course_id, $start_date, $expiration_date, $rubric_id);
     $surveysql->execute();
-    echo "Success.";
+    echo "Successfully created survey for course " . $course_num . " to go live on " . $start_date . " and expire on " . $expiration_date;
   }
   if(!empty($_POST['courseNumberEntryText']) and !empty($_POST['startDateText']) and !empty($_POST['startDateTimeText']) and !empty($_POST['closeDateText'])and !empty($_POST['closeDateTimeText']) and !empty($_POST['rubricEntryText']) ) {
     $courseNum = $_POST['courseNumberEntryText'];
@@ -135,13 +135,15 @@ hr {
     $closedDate = $closeDate . " " . $closeDateTime;
     $openDateObject = date_create_from_format('Y-m-d H:i', $openDate);
     $closedDateObject = date_create_from_format('Y-m-d H:i', $closedDate);
-    $current_time = new DateTime("now");
+    $current_time = date("Y-m-d H:i:s");
     // error checking for invalid times.
 
     if($openDateObject < $current_time){
       echo "Error: Survey must open on a time that hasn't happened yet.";
+      echo $openDateObject->format('Y-m-d H:i:s');
+      echo $current_time->format('Y-m-d H:i:s');
     }
-    if($closedDateObject > $openDateObject){
+    else if($closedDateObject > $openDateObject){
       echo "Dates are valid, proceeding...";
       addSurvey($con, $courseNum, $openDate, $closedDate, $rubric_name_input);
     }else{
