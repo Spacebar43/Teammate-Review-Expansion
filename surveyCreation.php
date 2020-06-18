@@ -34,7 +34,7 @@ hr {
         enctype="multipart/form-data">
 
         <input type='button'
-               onclick="window.location.href = 'adminHome.php';"
+               onclick="window.location.href = 'adminHome.php'"
                class="w3-center w3-button w3-theme-dark"
                value="Return Home"/></input>
   </form>
@@ -68,7 +68,6 @@ hr {
   </form>
 <hr>
 <?php
-  //echo "wat";
   require "lib/constants.php";
   date_default_timezone_set('America/New_York');
 
