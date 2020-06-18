@@ -46,10 +46,10 @@ hr {
   <form  id="newSurvey" class="w3-container w3-card-4 w3-light-blue" method='post'>
     <div id="courseNumber" class="w3-section">
         <h3>Enter the Course Number</h3>
-      <input maxlength="3" placeholder="442" name ='courseNumberEntryText' id="courseNumberEntryText" class="w3-input w3-light-grey" type="text" pattern="[0-9][0-9][0-9]$" required>
+      <input maxlength="3" placeholder="341" name ='courseNumberEntryText' id="courseNumberEntryText" class="w3-input w3-light-grey" type="text" pattern="[0-9][0-9][0-9]$" required>
       <hr>
       <h3>Enter the Rubric Name</h3>
-      <input placeholder="testRubric" name ='rubricEntryText' id="rubricEntryText" class="w3-input w3-light-grey" type="text" required>
+      <input placeholder="testrubric" name ='rubricEntryText' id="rubricEntryText" class="w3-input w3-light-grey" type="text" required>
       <hr>
         <h3>Enter the Start Date of Survey</h3>
       <input name ='startDateText' id="startDateText" class="w3-input w3-light-grey" type="date" required>
@@ -70,6 +70,7 @@ hr {
 <?php
   //echo "wat";
   require "lib/constants.php";
+  date_default_timezone_set('America/New_York');
 
   //error logging
   error_reporting(-1); // reports all errors
@@ -135,19 +136,21 @@ hr {
     $closedDate = $closeDate . " " . $closeDateTime;
     $openDateObject = date_create_from_format('Y-m-d H:i', $openDate);
     $closedDateObject = date_create_from_format('Y-m-d H:i', $closedDate);
-    $current_time = date("Y-m-d H:i:s");
+    $current_time = date("Y-m-d H:i");
+    $current_time_object = date_create_from_format('Y-m-d H:i', $current_time);
     // error checking for invalid times.
 
-    if($openDateObject < $current_time){
+    if($openDateObject < $current_time_object){
       echo "Error: Survey must open on a time that hasn't happened yet.";
-      echo $openDateObject->format('Y-m-d H:i:s');
-      echo $current_time->format('Y-m-d H:i:s');
+      //echo $openDateObject->format('Y-m-d H:i:s');
+      //echo "\n";
+      //echo $current_time_object->format('Y-m-d H:i');
     }
     else if($closedDateObject > $openDateObject){
       echo "Dates are valid, proceeding...";
       addSurvey($con, $courseNum, $openDate, $closedDate, $rubric_name_input);
     }else{
-      echo "Error: end date must occur after the survey start date";
+      echo "Error: End date must occur after the survey start date";
     }
   }
 ?>
