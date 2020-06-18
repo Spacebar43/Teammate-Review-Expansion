@@ -88,7 +88,7 @@ hr {
   $con = connectToDatabase();
 
   function addSurvey ($connection, $course_num, $start_date, $expiration_date, $rubric_name) {
-    echo "Added to database";
+    echo "Finding course...";
     $rubricsql = $connection -> prepare('SELECT id FROM rubrics WHERE name=? limit 1');
     $rubricsql->bind_param('s', $rubric_name);
     $rubricsql->execute();
@@ -119,9 +119,10 @@ hr {
 
     // now actual insertion
 
-    $surveysql = $con -> prepare('INSERT INTO surveys(course_id,start_date,expiration_date,rubric_id) values (?,?,?,?)' );
-    $surveysql->bind_param('issi', $courseID, $start_date, $expiration_date, $rubricID);
+    $surveysql = $connection->prepare('INSERT INTO surveys(course_id,start_date,expiration_date,rubric_id) values (?,?,?,?)' );
+    $surveysql->bind_param('issi', $course_id, $start_date, $expiration_date, $rubric_id);
     $surveysql->execute();
+    echo "Success.";
   }
   if(!empty($_POST['courseNumberEntryText']) and !empty($_POST['startDateText']) and !empty($_POST['startDateTimeText']) and !empty($_POST['closeDateText'])and !empty($_POST['closeDateTimeText']) and !empty($_POST['rubricEntryText']) ) {
     $courseNum = $_POST['courseNumberEntryText'];
@@ -134,6 +135,18 @@ hr {
     $closedDate = $closeDate . " " . $closeDateTime;
     $openDateObject = date_create_from_format('Y-m-d H:i', $openDate);
     $closedDateObject = date_create_from_format('Y-m-d H:i', $closedDate);
+    $current_time = new DateTime("now");
+    // error checking for invalid times.
+
+    if($openDateObject < $current_time){
+      echo "Error: Survey must open on a time that hasn't happened yet.";
+    }
+    if($closedDateObject > $openDateObject){
+      echo "Dates are valid, proceeding...";
+      addSurvey($con, $courseNum, $openDate, $closedDate, $rubric_name_input);
+    }else{
+      echo "Error: end date must occur after the survey start date";
+    }
   }
 ?>
 <hr>
