@@ -17,7 +17,7 @@ $_SESSION['faculty_id'] = '4';
     // set message for button
     value='Issue 51 Acceptence Test' 
     // select the file to jump to
-    onclick="window.location.href = '../../studentRegistration.php';">
+    onclick="window.location.href = '../../adminHome.php';">
 </input>
 </body>
 </html>
