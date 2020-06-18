@@ -89,7 +89,7 @@ hr {
   $con = connectToDatabase();
 
   function addSurvey ($connection, $course_num, $start_date, $expiration_date, $rubric_name) {
-    echo "Finding course...";
+    echo "Finding rubric...";
     $rubricsql = $connection -> prepare('SELECT id FROM rubrics WHERE name=? limit 1');
     $rubricsql->bind_param('s', $rubric_name);
     $rubricsql->execute();
@@ -100,7 +100,7 @@ hr {
       $rubricsql->close();
       exit();
     }
-    echo "Survey exists, fetching...";
+    echo "Rubric exists, fetching...";
     $rubricsql->fetch();
     //Rubric ID acquired
 
@@ -126,29 +126,29 @@ hr {
     echo "Successfully created survey for course " . $course_num . " to go live on " . $start_date . " and expire on " . $expiration_date;
   }
   if(!empty($_POST['courseNumberEntryText']) and !empty($_POST['startDateText']) and !empty($_POST['startDateTimeText']) and !empty($_POST['closeDateText'])and !empty($_POST['closeDateTimeText']) and !empty($_POST['rubricEntryText']) ) {
-    $courseNum = $_POST['courseNumberEntryText'];
-    $startDate = $_POST['startDateText'];
-    $startDateTimeText = $_POST['startDateTimeText'];
-    $closeDate = $_POST['closeDateText'];
-    $closeDateTime = $_POST['closeDateTimeText'];
+    $course_number = $_POST['courseNumberEntryText'];
+    $start_date = $_POST['startDateText'];
+    $start_date_time_text = $_POST['startDateTimeText'];
+    $close_date = $_POST['closeDateText'];
+    $close_date_time_text = $_POST['closeDateTimeText'];
     $rubric_name_input = $_POST['rubricEntryText'];
-    $openDate = $startDate . " " . $startDateTimeText;
-    $closedDate = $closeDate . " " . $closeDateTime;
-    $openDateObject = date_create_from_format('Y-m-d H:i', $openDate);
-    $closedDateObject = date_create_from_format('Y-m-d H:i', $closedDate);
+    $open_date = $start_date . " " . $start_date_time_text;
+    $closed_date = $close_date . " " . $close_date_time_text;
+    $open_date_object = date_create_from_format('Y-m-d H:i', $open_date);
+    $closed_date_object = date_create_from_format('Y-m-d H:i', $closed_date);
     $current_time = date("Y-m-d H:i");
     $current_time_object = date_create_from_format('Y-m-d H:i', $current_time);
     // error checking for invalid times.
 
-    if($openDateObject < $current_time_object){
+    if($open_date_object < $current_time_object){
       echo "Error: Survey must open on a time that hasn't happened yet.";
-      //echo $openDateObject->format('Y-m-d H:i:s');
+      //echo $open_date_object->format('Y-m-d H:i:s');
       //echo "\n";
       //echo $current_time_object->format('Y-m-d H:i');
     }
-    else if($closedDateObject > $openDateObject){
+    else if($closed_date_object > $open_date_object){
       echo "Dates are valid, proceeding...";
-      addSurvey($con, $courseNum, $openDate, $closedDate, $rubric_name_input);
+      addSurvey($con, $course_number, $open_date, $closed_date, $rubric_name_input);
     }else{
       echo "Error: End date must occur after the survey start date";
     }
