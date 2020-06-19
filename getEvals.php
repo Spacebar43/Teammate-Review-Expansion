@@ -64,7 +64,7 @@ hr {
       <div id="evals_table" class="w3-container w3-grey">
         <hr>
         <?php
-          require("getRawEvals.php");
+          require("downloadRawEvals.php");
           $conn = connectToDatabase();
           $sql = "SELECT survey_id, submitter_email, teammate_email, score1, score2, score3, score4, score5 FROM readable_evals ORDER BY teammate_email";
           $result = $conn->query($sql);
@@ -84,7 +84,7 @@ hr {
       </div>
 
       <hr>
-      <form method="post" action="getRawEvals.php">
+      <form method="post" action="downloadRawEvals.php">
         <input type="submit" name="get_raw_evals" class="w3-center w3-button w3-theme-dark" value="Download Evals"/>
       </form>
       <hr>
