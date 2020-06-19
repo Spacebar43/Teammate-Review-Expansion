@@ -55,7 +55,13 @@ hr {
 <hr>
 <?php
 
-  require "lib/constants.php";
+  function addCourse ($connection, $courseNum, $courseName) {
+    echo "Added to database";
+    $sql = $connection->prepare( 'INSERT INTO course (code,name) values(?,?)' );
+    $sql->bind_param('is', $courseNum, $courseName);
+    $sql->execute();
+  }
+
 
   //error logging
   error_reporting(-1); // reports all errors
@@ -65,25 +71,54 @@ hr {
 
   session_start();
 
+  require "lib/database.php";
+  require "lib/constants.php";
+
   if(!isset($_SESSION['faculty_id'])) {
     header("Location: ".SITE_HOME."index.php");
     exit();
   }
 
-  require "lib/database.php";
   $con = connectToDatabase();
 
-  function addCourse ($connection, $courseNum, $courseName) {
-    echo "Added to database";
-    $sql = $connection->prepare( 'INSERT INTO course (code,name) values(?,?)' );
-    $sql->bind_param('is', $courseNum, $courseName);
-    $sql->execute();
-  }
-  //
-  if(!empty($_POST['courseNumberEntryText']) and !empty($_POST['courseNameEntryText'])) {
+
+
+  if(isset($_POST['facultyPasswordEntryText']) && !empty($_POST['facultyPasswordEntryText'])){
+
+    $code = $_POST['facultyPasswordEntryText'];
+    $stmt= $con->prepare('SELECT * FROM faculty_login WHERE password=?');
+    $stmt->bind_param('s',$code);
+    $stmt->execute();
+    $stmt->store_result();
+    if($stmt->num_rows == 0){
+          echo '<script language="javascript">';
+          echo 'alert("Code not found! Please check that you have typed the code correctly, or get a new one.")';
+          echo '</script>';
+          $stmt->close();
+          exit();
+    }
+
+    $time = time();
+
+    $stmt = $con->prepare('SELECT id, email FROM faculty_login WHERE password=? AND expiration_time > ?');
+    $stmt->bind_param('si',$code,$time);
+    $stmt->execute();
+    $stmt->store_result();
+    if($stmt->num_rows == 0){
+          echo '<script language="javascript">';
+          echo 'alert("Your access code has expired, please get a new code.")';
+          echo '</script>';
+    	    $stmt->close();
+    	    exit();
+    }
+    $stmt->bind_result($id,$email);
+    $stmt->fetch();
+
     $courseNum = $_POST['courseNumberEntryText'];
     $courseName = $_POST['courseNameEntryText'];
+
     addCourse($con, $courseNum, $courseName);
+
   }
 ?>
 <hr>
