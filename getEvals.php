@@ -12,6 +12,9 @@
     header("Location: ".SITE_HOME."index.php");
     exit();
   }
+  require "lib/database.php";
+
+  $conn = connectToDatabase();
 
 ?>
 
@@ -60,16 +63,37 @@ hr {
 
       <div id="evals_table" class="w3-container w3-grey">
         <hr>
+        <?php
+          require("getRawEvals.php");
+          $conn = connectToDatabase();
+          $sql = "SELECT survey_id, submitter_email, teammate_email, score1, score2, score3, score4, score5 FROM readable_evals ORDER BY teammate_email";
+          $result = $conn->query($sql);
+
+          if ($result->num_rows > 0) {
+          // output data of each row
+            while($row = $result->fetch_assoc()) {
+
+              echo "Survey id: " . $row['survey_id'] ."| Reviewer: " . $row['submitter_email'] . "| Reviewee: " . $row['teammate_email'] . "| score1: " . $row['score1']. "| score2: " . $row['score2']. "| score3: " . $row['score3']. "| score4: " . $row['score4']. "| score5: " . $row['score5'] ."<br>";
+            }
+          } else {
+            echo "0 results";
+          }
+          $conn->close();
+
+        ?>
       </div>
 
       <hr>
-      <input type="button" class="w3-center w3-button w3-theme-dark " value="Download Evals"/></input>
+      <form method="post" action="getRawEvals.php">
+        <input type="submit" name="get_raw_evals" class="w3-center w3-button w3-theme-dark" value="Download Evals"/>
+      </form>
       <hr>
     </div>
 
   <div id="right_padding" class="w3-container w3-cell"></div>
 
 </div>
+
 <hr>
 
 <!-- Footer -->
