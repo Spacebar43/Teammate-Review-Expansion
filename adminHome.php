@@ -11,6 +11,13 @@
     header("Location: ".SITE_HOME."index.php");
     exit();
   }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 076d3d2... Connected Course Creation page to Faculty Control Panel #78
+>>>>>>> 5921691332a84f16e856e61749299912ea3e9dbb
 ?>
 
 
@@ -48,6 +55,7 @@ hr {
         <input type='button'
                onclick="window.location.href = 'createCourses.php';"
                class="w3-center w3-button w3-theme-dark"
+<<<<<<< HEAD
                value="Create Courses"/>
         <!--- Create Surveys --->
         <input type='button'
@@ -59,9 +67,38 @@ hr {
                onclick="window.location.href = 'studentRegistration.php';"
                class="w3-center w3-button w3-theme-dark"
                value="Register Students"/>
+=======
+               value="Create Courses"/></input>
+
+<<<<<<< HEAD
+        <input type='button'
+               onclick="window.location.href = 'surveyCreation.php';"
+               class="w3-center w3-button w3-theme-dark"
+               value="Create Survey"/></input>
+
+
   </form>
 </div>
 
+<!-- Register Students -->
+<div class="w3-row-padding w3-center w3-padding">
+  <form class="w3-container w3-card-4 w3-light-blue"
+        method="post"
+        name="RegStd" id="RegStd"
+        enctype="multipart/form-data">
+
+        <input type='button'
+               onclick="window.location.href = 'studentRegistration.php';"
+               class="w3-center w3-button w3-theme-dark"
+               value="Register Students"/></input>
+  </form>
+</div>
+=======
+>>>>>>> 5921691332a84f16e856e61749299912ea3e9dbb
+  </form>
+</div>
+
+>>>>>>> 076d3d2... Connected Course Creation page to Faculty Control Panel #78
 
 <!-- Upload CSV -->
 <div class="w3-row-padding w3-center w3-padding">
@@ -83,6 +120,14 @@ hr {
     </div>
   </form>
 </div>
+<!-- Footer -->
+<footer id="footer" class="w3-container w3-theme-dark w3-padding-16">
+  <h3>Acknowledgements</h3>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+  <p> <a  class=" w3-theme-light" target="_blank"></a></p>
+</footer>
+
+
 <!-- Footer -->
 <footer id="footer" class="w3-container w3-theme-dark w3-padding-16">
   <h3>Acknowledgements</h3>
