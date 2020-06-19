@@ -11,10 +11,6 @@
     header("Location: ".SITE_HOME."index.php");
     exit();
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> 076d3d2... Connected Course Creation page to Faculty Control Panel #78
 ?>
 
 
@@ -35,38 +31,6 @@ hr {
     clear: both;
     visibility: hidden;
 }
-/*
-  .dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-  }
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
-*/
 </style>
 
 
@@ -78,46 +42,26 @@ hr {
 <div>
   <form class="w3-container w3-card-4 w3-light-blue"
         method="post"
-        name="frmCSVImport" id="frmCSVImport"
+        name="adminControlPanel" id="adminControlPanel"
         enctype="multipart/form-data">
 
         <input type='button'
                onclick="window.location.href = 'createCourses.php';"
                class="w3-center w3-button w3-theme-dark"
-               value="Create Courses"/></input>
-<<<<<<< HEAD
-=======
-
->>>>>>> 93dd7d8... Merge branch 'faculty_login' of https://github.com/cse442-spring-2020-offering/teamwork-expansion-system-cse442summer2020 into faculty_login
-<<<<<<< HEAD
+               value="Create Courses"/>
+        <!--- Create Surveys --->
         <input type='button'
                onclick="window.location.href = 'surveyCreation.php';"
                class="w3-center w3-button w3-theme-dark"
-               value="Create Survey"/></input>
-
-=======
->>>>>>> 4903f99... added button to adminHome.php to direct to studentRegistration.php iss #82
-  </form>
-</div>
-
-<!-- Register Students -->
-<div class="w3-row-padding w3-center w3-padding">
-  <form class="w3-container w3-card-4 w3-light-blue"
-        method="post"
-        name="RegStd" id="RegStd"
-        enctype="multipart/form-data">
-
+               value="Create Survey"/>
+        <!-- Register Students -->
         <input type='button'
                onclick="window.location.href = 'studentRegistration.php';"
                class="w3-center w3-button w3-theme-dark"
-               value="Register Students"/></input>
-  </form>
-</div>
-=======
+               value="Register Students"/>
   </form>
 </div>
 
->>>>>>> 076d3d2... Connected Course Creation page to Faculty Control Panel #78
 
 <!-- Upload CSV -->
 <div class="w3-row-padding w3-center w3-padding">
@@ -139,14 +83,6 @@ hr {
     </div>
   </form>
 </div>
-<!-- Footer -->
-<footer id="footer" class="w3-container w3-theme-dark w3-padding-16">
-  <h3>Acknowledgements</h3>
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-  <p> <a  class=" w3-theme-light" target="_blank"></a></p>
-</footer>
-
-
 <!-- Footer -->
 <footer id="footer" class="w3-container w3-theme-dark w3-padding-16">
   <h3>Acknowledgements</h3>
