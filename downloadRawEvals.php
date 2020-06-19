@@ -1,15 +1,6 @@
 <?php
 
 
-  session_start();
-  require "lib/constants.php";
-
-  // if an id is not set for this session return to homepage
-  if(!isset($_SESSION['faculty_id'])) {
-    header("Location: ".SITE_HOME."index.php");
-    exit();
-  }
-
   error_reporting(-1); // reports all errors
   ini_set("display_errors", "1"); // shows all errors
   ini_set("log_errors", 1);
