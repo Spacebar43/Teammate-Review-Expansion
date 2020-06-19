@@ -11,6 +11,10 @@
     header("Location: ".SITE_HOME."index.php");
     exit();
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 076d3d2... Connected Course Creation page to Faculty Control Panel #78
 ?>
 
 
@@ -82,6 +86,10 @@ hr {
                class="w3-center w3-button w3-theme-dark"
                value="Create Courses"/></input>
 <<<<<<< HEAD
+=======
+
+>>>>>>> 93dd7d8... Merge branch 'faculty_login' of https://github.com/cse442-spring-2020-offering/teamwork-expansion-system-cse442summer2020 into faculty_login
+<<<<<<< HEAD
         <input type='button'
                onclick="window.location.href = 'surveyCreation.php';"
                class="w3-center w3-button w3-theme-dark"
@@ -105,6 +113,11 @@ hr {
                value="Register Students"/></input>
   </form>
 </div>
+=======
+  </form>
+</div>
+
+>>>>>>> 076d3d2... Connected Course Creation page to Faculty Control Panel #78
 
 <!-- Upload CSV -->
 <div class="w3-row-padding w3-center w3-padding">
@@ -126,6 +139,14 @@ hr {
     </div>
   </form>
 </div>
+<!-- Footer -->
+<footer id="footer" class="w3-container w3-theme-dark w3-padding-16">
+  <h3>Acknowledgements</h3>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+  <p> <a  class=" w3-theme-light" target="_blank"></a></p>
+</footer>
+
+
 <!-- Footer -->
 <footer id="footer" class="w3-container w3-theme-dark w3-padding-16">
   <h3>Acknowledgements</h3>
