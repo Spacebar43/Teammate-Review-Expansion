@@ -2,7 +2,7 @@
 <html>
 <body>
     
-    <form method='post'>
+    <form hidden method='post'>
         Manually input entry:<br>
         id: <input type='number' name='id'><br>
         email: <input type='text' name='email'><br>
@@ -10,10 +10,16 @@
         <input type='submit' name='manual' value='Insert'/>
     </form>
     <form method='post'enctype='multipart/form-data'>
-        Input via .csv upload:<br>
+        Check if .csv is properly formatted:<br>
         <input type='file' name='csv' accept='.csv'>
-        <button type='submit' name='import'>Import</button>
-    <form>
+        <button type='submit' name='check'>Check</button>
+    </form>
+    <form method='post'enctype='multipart/form-data'>
+        Import via .csv upload:<br>
+        <input type='file' name='csv' accept='.csv'>
+        <button type='submit' name='import'>Import</button><br>
+        **THIS ASSUMES CORRECTLY FORMATTED FILE**
+    </form>
     <br>
     --- 
     <br>
@@ -65,8 +71,10 @@
         // insert entries from a .csv file
         // when button is pressed
         if(array_key_exists('import', $_POST)) {
+            // print contents of file as formatted
+            echo 'File uploeaded:'.'<br>';
             echo '<pre>'.file_get_contents($_FILES['csv']['tmp_name']).'</pre>'.'<br>';
-            //TODO parse contents into import statement
+            // get file reference
             $csv = fopen($_FILES['csv']['tmp_name'], 'r');
             // loop through every row of file
             while ($row = fgetcsv($csv)) {
@@ -92,6 +100,29 @@
                 }
             }
             echo '<br>'.'Updates completed.';
+        }
+
+        // check if .csv is properly formatted
+        if(array_key_exists('check', $_POST)) {
+            // print contents of file as formatted
+            echo 'File uploaded:'.'<br>';
+            echo '<pre>'.file_get_contents($_FILES['csv']['tmp_name']).'</pre>'.'<br>';
+            // get file reference
+            $csv = fopen($_FILES['csv']['tmp_name'], 'r');
+            // loop through every row of file
+            $count = 1; $formatted_correctly = true;
+            while ($row = fgetcsv($csv)) {
+                if (sizeof($row) != 2) {
+                    $formatted_correctly = false;
+                    echo 'error: row '.$count.' has '.sizeof($row).' columns.'.'<br>';
+                }
+                $count++;
+            }
+            if (!$formatted_correctly) {
+                echo 'File not formatted correctly.'.'<br>';
+            } else {
+                echo 'File formatted correctly!'.'<br>';
+            }
         }
     ?>
 </body>
