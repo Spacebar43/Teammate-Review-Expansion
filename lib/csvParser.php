@@ -14,37 +14,24 @@
     ini_set("log_errors", 1);
     ini_set("error_log", "~/php-error.log");
     
-    // use require statament here to minimize code in registrationConfirmation.php
-    require "database.php"
-    $con = connectToDatabase();
-
-    /*      
-        function: csvGetCollumn
-        inputs: $csv - the tmp_name of the .csv ; $collumn - int of which collumn to get (from 0)
-        output: an array containing all of the values of that collumn
-        This will be used to provide user feedback by getting names of all students added
+    /*
+        function: csv_check
+        inputs: $csv - the tmp_name of the .csv
+        output: a string containing a success/error message
+        This function checks if the csv is formatted to have 2 columns in every row.
+        Otherwise, provides errorrasdaasdsad
     */
-    function csvGetCollumn($csv, $collumn) {
+    function csv_check($csv) {
         //TODO
     }
 
     /*
-        function: insertHelper
-        inputs: $email - student's email ; $name - student's name
-        output: a string containing the SQL code
-        This function performs the insertion and returns the statement for testing
-    */
-    function insertHelper($email, $name) {
-        //TODO
-    }
-
-    /*
-        function: insertStudents
+        function: insert_students
         inputs: $csv - the tmp_name of the .csv 
-        outputs: a string with the list of students added to the database
+        outputs: a string with messages with information of which students were added or not
         Using a loop, inserts all students to the database.
     */
-    function insertStudents($csv) {
+    function insert_students($csv) {
         //TODO
     }
 }
