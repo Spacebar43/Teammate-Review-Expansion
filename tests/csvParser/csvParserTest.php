@@ -10,10 +10,7 @@
     </form>
 
     <?php
-        //todo create test file for ../../lib/csvParser.php
-
         require '../../lib/csvParser.php';
-        require '../../lib/database.php';
 
         if(array_key_exists('import', $_POST)) {
             insert_students($_FILES['csv']['tmp_name']);
