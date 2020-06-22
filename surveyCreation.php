@@ -114,7 +114,7 @@ hr {
       $coursesql->close();
       exit();
     }
-    echo "Course exists, fetching...";
+    //echo "Course exists, fetching...";
     $coursesql->fetch();
 
 
@@ -147,7 +147,7 @@ hr {
       //echo $current_time_object->format('Y-m-d H:i');
     }
     else if($closed_date_object > $open_date_object){
-      echo "Dates are valid, proceeding...";
+      //echo "Dates are valid, proceeding...";
       addSurvey($con, $course_number, $open_date, $closed_date);
     }else{
       echo "Error: End date must occur after the survey start date";
