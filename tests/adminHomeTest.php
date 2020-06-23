@@ -11,6 +11,6 @@ $_SESSION['loggedin'] = TRUE;
 $_SESSION['email'] = 'slgreco@buffalo.edu';
 $_SESSION['id'] = '2';
 $_SESSION['faculty_id'] = '2';
-header("Location: ../../adminHome.php");
+header("Location: ../adminHome.php");
 
 ?>
