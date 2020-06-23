@@ -11,6 +11,8 @@ $_SESSION['loggedin'] = TRUE;
 $_SESSION['email'] = 'trcerny@buffalo.edu';
 $_SESSION['id'] = '17';
 $_SESSION['faculty_id'] = '4';
+// jump to the first page of the test
+header('Location: ../../adminHome.php');
 ?>
 
 <input type='submit' 
