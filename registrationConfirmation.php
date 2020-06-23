@@ -31,10 +31,16 @@
 
 <?php
 if (isset($_POST['Import'])) {
+
+  require 'lib/csvParser.php';
+
   $fileTmp = $_FILES['file']['tmp_name'];
-  echo '<pre>';
-  echo file_get_contents($fileTmp);
-  echo '</pre>';
+  if (csv_check($fileTmp)) {
+    insert_students($fileTmp);
+  }
+  else {
+    echo 'File not correctly formatted. Each row must have two (2) columns.'.'<br>';
+  }
 }
 ?>
 

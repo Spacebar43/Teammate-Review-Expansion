@@ -13,6 +13,9 @@
         require '../../lib/csvParser.php';
 
         if(array_key_exists('import', $_POST)) {
+            $tmp = $_FILES['csv']['tmp_name'];
+            echo 'File uploaded:'.'<br>';
+            echo '<pre>'.file_get_contents($tmp).'</pre>'.'<br>';
             insert_students($_FILES['csv']['tmp_name']);
         }
     ?>

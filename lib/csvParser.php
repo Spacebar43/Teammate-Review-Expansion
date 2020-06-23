@@ -48,12 +48,10 @@
     function insert_students($tmp) {
         require 'database.php';
         $con = connectToDatabase();
-        echo 'File uploaded:'.'<br>';
-        echo '<pre>'.file_get_contents($tmp).'</pre>'.'<br>';
         //get file reference
         $csv = fopen($tmp, 'r');
         while ($row = fgetcsv($csv)) { // for each row in .csv file
-            $id = 0;//todo random int(11) assigned
+            $id = 0; // database is formatted to handle this
             $name = $row[0] ; $email = $row[1];
             // compare to database
             $sql_get = $con->prepare('SELECT email from students WHERE email=?');
@@ -64,7 +62,7 @@
             $sql_get-> fetch();
             if ($sql_get-> num_rows != 0) { 
                 // email is already in database, don't add
-                echo $name.' is already in database.'.'<br>';
+                echo $name.' is already registered to the system.'.'<br>';
             }
             else {
                 // prepare SQL statement, bind parameters and execute
