@@ -13,17 +13,31 @@
     ini_set("display_errors", "1"); // shows all errors
     ini_set("log_errors", 1);
     ini_set("error_log", "~/php-error.log");
-    
+   
+
     /*
         function: csv_check
         inputs: $tmp - the tmp_name of the .csv
-        output: a string containing a success/error message
+        output: boolean, true if file is formatted correctly, false if otherwise
         This function checks if the csv is formatted to have 2 columns in every row.
         Otherwise, provides errorrasdaasdsad
     */
     function csv_check($tmp) {
         //TODO
+        // get file reference
+        $csv = fopen(($tmp), 'r');
+        // variables for tracking errors
+        $count = 1; $correct = true;
+        while ($row = fgetcsv($csv)) { // for each row in .csv file
+            if (sizeof($row) != 2) {
+                $correct = false;
+                echo 'error: row '.$count.' has '.sizeof($row).' columns'.'<br>';
+            }
+            $count++;
+        }
+        return $correct;
     }
+
 
     /*
         function: insert_students
