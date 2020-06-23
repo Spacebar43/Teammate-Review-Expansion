@@ -79,10 +79,10 @@ hr {
 
   session_start();
 
-  /*if(!isset($_SESSION['faculty_id'])) {
+  if(!isset($_SESSION['faculty_id'])) {
     header("Location: ".SITE_HOME."index.php");
     exit();
-  }*/
+  }
 
   require "lib/database.php";
   $con = connectToDatabase();
