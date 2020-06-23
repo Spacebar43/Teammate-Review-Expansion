@@ -80,13 +80,17 @@ hr {
         <input type='button'
                onclick="window.location.href = 'createCourses.php';"
                class="w3-center w3-button w3-theme-dark"
-               value="Create Courses"/></input>
-
+               value="Create Courses"/>
+               
+       <input type='button'
+              onclick="window.location.href = 'getEvals.php';"
+              class="w3-center w3-button w3-theme-dark"
+              value="Review Evals"/>
+    
         <input type='button'
                onclick="window.location.href = 'surveyCreation.php';"
                class="w3-center w3-button w3-theme-dark"
                value="Create Survey"/></input>
-
 
   </form>
 </div>
