@@ -20,7 +20,8 @@ $group_members=array();
 $group_IDs=array();
 
 $stmt = $con->prepare('SELECT students.name, students.student_ID FROM teammates
-	                     INNER JOIN students ON teammates.teammate_ID = students.student_ID WHERE teammates.survey_ID =? AND teammates.student_ID=?;');
+	                   INNER JOIN students ON teammates.teammate_ID = students.student_ID 
+                       WHERE teammates.survey_ID =? AND teammates.student_ID=?;');
 $stmt->bind_param('ii',$surveys_ID,$student_ID);
 $stmt->execute();
 $stmt->bind_result($group_member,$group_ID);
@@ -80,14 +81,16 @@ if ( !empty($_POST) && isset($_POST)) {
 	$e=intval($_POST['Q5']);
   //if scores don't exist
 	if($student_scores[1] == -1){
-    $stmt = $con->prepare('INSERT INTO scores (score1, score2, score3, score4, score5, eval_id) VALUES(?,?,?,?,?,?)');
-    $stmt->bind_param('iiiiii',$a, $b,$c,$d,$e , $eval_ID);
-    $stmt->execute();
+        $stmt = $con->prepare('INSERT INTO scores (score1, score2, score3, score4, score5, eval_id) 
+                               VALUES(?,?,?,?,?,?)');
+        $stmt->bind_param('iiiiii',$a, $b,$c,$d,$e , $eval_ID);
+        $stmt->execute();
 	 } else {
-    $stmt = $con->prepare('UPDATE scores set score1=?, score2=?, score3=?, score4=?, score5=? WHERE eval_id=?');
-    $stmt->bind_param('iiiiii',$a, $b,$c,$d,$e , $eval_ID);
-    $stmt->execute();
-  }
+        $stmt = $con->prepare('UPDATE scores set score1=?, score2=?, score3=?, score4=?, score5=? 
+                               WHERE eval_id=?');
+        $stmt->bind_param('iiiiii',$a, $b,$c,$d,$e , $eval_ID);
+        $stmt->execute();
+      }
 	$stmt = $con->prepare('SELECT score1, score2, score3, score4, score5 FROM scores WHERE eval_id=?');
 	$stmt->bind_param('i', $eval_ID);
 	$stmt->execute();

@@ -62,72 +62,72 @@ $con = connectToDatabase();
 if(empty($_POST['p'])) {
 
   if(isset($_POST['loginEmailEntryText']) && !empty($_POST['loginEmailEntryText']) ) {
-  $email = $_POST['loginEmailEntryText'];
+    $email = $_POST['loginEmailEntryText'];
 
 	//check if student is enrolled
 	$stmt = $con->prepare('SELECT email from students WHERE email=?');
-  $stmt->bind_param('s',$email);
-  $stmt->execute();
+    $stmt->bind_param('s',$email);
+    $stmt->execute();
 	$stmt->bind_result($flag);
 	$stmt->store_result();
 	$stmt->fetch();
 	if($stmt->num_rows == 0){
 		echo '<script language="javascript">';
-    echo 'alert("Email was not found in the list of students. Please contact your professor.")';
-    echo '</script>';
+        echo 'alert("Email was not found in the list of students. Please contact your professor.")';
+        echo '</script>';
 		$stmt->close();
 		exit();
 	}
 
-  $expiration_time = time()+ 60 * 15;
-  //update passcode and timestamp
-  $stmt = $con->prepare('UPDATE student_login SET expiration_time =? WHERE email=?');
-  $stmt->bind_param('is', $expiration_time, $email);
-  $stmt->execute();
-  if($stmt->affected_rows == 0){
-      $stmt = $con->prepare('INSERT INTO student_login (email,expiration_time) VALUES(?,?)');
-      $stmt->bind_param('si', $email, $expiration_time);
-      $stmt->execute();
-  }
-  $code_available = false;
-  //if password is taken try until it's not taken
-  while(!$code_available){
-      $code = random_string(10);
-      $stmt = $con->prepare('UPDATE student_login SET password =? WHERE email=?');
-      $stmt->bind_param('ss', $code, $email);
-      $code_available = $stmt->execute();
-  }
-  $date = new DateTime("@$expiration_time");
-  $date->setTimezone(new DateTimeZone('America/New_York'));
-  $human_exp_time = $date->format('h:i a');
-  //be careful the email text is whitespace sensitive
-  mail($email,"Teamwork Evaluation Form Access Code", "<h1>Your code is: ".$code."</h1>
-        <p>It will expire at ".$human_exp_time." EST</p>
-        </hr>
-        Use it here: ".SITE_HOME."accessCodePage.php",
-        'Content-type: text/html; charset=utf-8\r\n'.
-        'From: Teamwork Evaluation Access Code Generator <apache@buffalo.edu>');
-      header("Location: emailConfirmation.php"); /* Redirect browser to a test link*/
-  exit();
+    $expiration_time = time()+ 60 * 15;
+    //update passcode and timestamp
+    $stmt = $con->prepare('UPDATE student_login SET expiration_time =? WHERE email=?');
+    $stmt->bind_param('is', $expiration_time, $email);
+    $stmt->execute();
+    if($stmt->affected_rows == 0){
+        $stmt = $con->prepare('INSERT INTO student_login (email,expiration_time) VALUES(?,?)');
+        $stmt->bind_param('si', $email, $expiration_time);
+        $stmt->execute();
+    }
+    $code_available = false;
+    //if password is taken try until it's not taken
+    while(!$code_available){
+        $code = random_string(10);
+        $stmt = $con->prepare('UPDATE student_login SET password =? WHERE email=?');
+        $stmt->bind_param('ss', $code, $email);
+        $code_available = $stmt->execute();
+    }
+    $date = new DateTime("@$expiration_time");
+    $date->setTimezone(new DateTimeZone('America/New_York'));
+    $human_exp_time = $date->format('h:i a');
+    //be careful the email text is whitespace sensitive
+    mail($email,"Teamwork Evaluation Form Access Code", "<h1>Your code is: ".$code."</h1>
+          <p>It will expire at ".$human_exp_time." EST</p>
+          </hr>
+          Use it here: ".SITE_HOME."accessCodePage.php",
+          'Content-type: text/html; charset=utf-8\r\n'.
+          'From: Teamwork Evaluation Access Code Generator <apache@buffalo.edu>');
+        header("Location: emailConfirmation.php"); /* Redirect browser to a test link*/
+    exit();
   }
 
 } else {
 
-  if(isset($_POST['loginEmailEntryText']) && !empty($_POST['loginEmailEntryText']) ) {
-  $email = $_POST['loginEmailEntryText'];
+    if(isset($_POST['loginEmailEntryText']) && !empty($_POST['loginEmailEntryText']) ) {
+    $email = $_POST['loginEmailEntryText'];
 
 	//check if faculty is enrolled
 
 	$stmt = $con->prepare('SELECT email from faculty WHERE email=?');
-  $stmt->bind_param('s',$email);
-  $stmt->execute();
+    $stmt->bind_param('s',$email);
+    $stmt->execute();
 	$stmt->bind_result($flag);
 	$stmt->store_result();
 	$stmt->fetch();
 	if($stmt->num_rows == 0){
 		echo '<script language="javascript">';
-    echo 'alert("Email was not found in the list of faculty. Please contact your professor.")';
-    echo '</script>';
+        echo 'alert("Email was not found in the list of faculty. Please contact your professor.")';
+        echo '</script>';
 		$stmt->close();
 		exit();
 	}
