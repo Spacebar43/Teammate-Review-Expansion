@@ -35,7 +35,7 @@ hr {
     <h3>Please enter the Course Number and Name</h3>
     <div id="courseNumber" class="w3-section">
 	<hr>
-      <input maxlength="3" placeholder="442" name ='courseNumberEntryText' id="courseNumberEntryText" class="w3-input w3-light-grey" type="text" pattern="[0-9][0-9][0-9]$" required>
+      <input maxlength="5" placeholder="442" name ='courseNumberEntryText' id="courseNumberEntryText" class="w3-input w3-light-grey" type="text" required>
       <hr>
       <input placeholder="Intro to Software Engineering" name ='courseNameEntryText' id="courseNameEntryText" class="w3-input w3-light-grey" type="text" required>
       <hr>
@@ -72,18 +72,18 @@ hr {
 
   require "lib/database.php";
   $con = connectToDatabase();
-
-  function addCourse ($connection, $courseNum, $courseName) {
+  $faculty_id = $_SESSION['faculty_id'];
+  function addCourse ($connection, $courseNum, $courseName, $faculty_id) {
     echo "Added to database";
-    $sql = $connection->prepare( 'INSERT INTO course (code,name) values(?,?)' );
-    $sql->bind_param('is', $courseNum, $courseName);
+    $sql = $connection->prepare( 'INSERT INTO course (code,name,faculty_id) values(?,?,?)' );
+    $sql->bind_param('isi', $courseNum, $courseName, $faculty_id);
     $sql->execute();
   }
   //
   if(!empty($_POST['courseNumberEntryText']) and !empty($_POST['courseNameEntryText'])) {
     $courseNum = $_POST['courseNumberEntryText'];
     $courseName = $_POST['courseNameEntryText'];
-    addCourse($con, $courseNum, $courseName);
+    addCourse($con, $courseNum, $courseName, $faculty_id);
   }
 ?>
 <hr>
