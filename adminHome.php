@@ -11,13 +11,6 @@
     header("Location: ".SITE_HOME."index.php");
     exit();
   }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> 076d3d2... Connected Course Creation page to Faculty Control Panel #78
->>>>>>> 5921691332a84f16e856e61749299912ea3e9dbb
 ?>
 
 
@@ -55,50 +48,23 @@ hr {
         <input type='button'
                onclick="window.location.href = 'createCourses.php';"
                class="w3-center w3-button w3-theme-dark"
-<<<<<<< HEAD
                value="Create Courses"/>
+
         <!--- Create Surveys --->
         <input type='button'
                onclick="window.location.href = 'surveyCreation.php';"
                class="w3-center w3-button w3-theme-dark"
                value="Create Survey"/>
+
         <!-- Register Students -->
         <input type='button'
                onclick="window.location.href = 'studentRegistration.php';"
                class="w3-center w3-button w3-theme-dark"
                value="Register Students"/>
-=======
-               value="Create Courses"/></input>
-
-<<<<<<< HEAD
-        <input type='button'
-               onclick="window.location.href = 'surveyCreation.php';"
-               class="w3-center w3-button w3-theme-dark"
-               value="Create Survey"/></input>
 
 
   </form>
 </div>
-
-<!-- Register Students -->
-<div class="w3-row-padding w3-center w3-padding">
-  <form class="w3-container w3-card-4 w3-light-blue"
-        method="post"
-        name="RegStd" id="RegStd"
-        enctype="multipart/form-data">
-
-        <input type='button'
-               onclick="window.location.href = 'studentRegistration.php';"
-               class="w3-center w3-button w3-theme-dark"
-               value="Register Students"/></input>
-  </form>
-</div>
-=======
->>>>>>> 5921691332a84f16e856e61749299912ea3e9dbb
-  </form>
-</div>
-
->>>>>>> 076d3d2... Connected Course Creation page to Faculty Control Panel #78
 
 <!-- Upload CSV -->
 <div class="w3-row-padding w3-center w3-padding">
