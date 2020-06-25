@@ -45,7 +45,7 @@ hr {
   <form  id="newSurvey" class="w3-container w3-card-4 w3-light-blue" method='post'>
     <div id="courseNumber" class="w3-section">
         <h3>Enter the Course Number</h3>
-      <input maxlength="3" placeholder="341" name ='courseNumberEntryText' id="courseNumberEntryText" class="w3-input w3-light-grey" type="text" pattern="[0-9][0-9][0-9]$" required>
+      <input placeholder="341" name ='courseNumberEntryText' id="courseNumberEntryText" class="w3-input w3-light-grey" type="text" required>
       <hr>
       <!-- Code is used when we want users to be able to create their own question forms. -->
       <!--<h3>Enter the Rubric Name</h3>
@@ -105,7 +105,7 @@ hr {
     //Rubric ID acquired
     $rubric_id = 1;
     $coursesql = $connection -> prepare('SELECT id FROM course WHERE code=? limit 1');
-    $coursesql->bind_param('i', $course_num);
+    $coursesql->bind_param('s', $course_num);
     $coursesql->execute();
     $coursesql->bind_result($course_id);
     $coursesql->store_result();
@@ -121,7 +121,7 @@ hr {
     // now actual insertion
 
     $surveysql = $connection->prepare('INSERT INTO surveys(course_id,start_date,expiration_date,rubric_id) values (?,?,?,?)' );
-    $surveysql->bind_param('issi', $course_id, $start_date, $expiration_date, $rubric_id);
+    $surveysql->bind_param('sssi', $course_id, $start_date, $expiration_date, $rubric_id);
     $surveysql->execute();
     echo "Successfully created survey for course " . $course_num . " to go live on " . $start_date . " and expire on " . $expiration_date;
   }
