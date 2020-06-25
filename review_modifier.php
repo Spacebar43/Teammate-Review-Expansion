@@ -11,7 +11,7 @@
 
 <!-- Header -->
 <header id="header" class="w3-container w3-theme w3-padding">
-    <div id="headerContentName"><font class="w3-center w3-theme"><h1>Modify Reviewers</h1></font></div>
+    <div id="headerContentName"><font class="w3-center w3-theme"><h1>Modify Reviewers Dashboard</h1></font></div>
 </header>
 <div class="w3-container w3-card-4 w3-light-blue">
   <?php
@@ -34,12 +34,24 @@
     $sql = "SELECT survey_id, reviewer_email, teammate_email FROM reviewers";
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
+      echo '<div class="w3-row">';
+      echo '<div class="w3-col s3 m3 l3"> Survey Id </div>';
+      echo '<div class="w3-col s3 m3 l3"> Reviewer Email </div>';
+      echo '<div class="w3-col s3 m3 l3"> Teammate Email </div>';
+      echo '<div class="w3-col s3 m3 l3"> </div>';
+      echo '</div>';
+      $i = 0;
       while($row = $result->fetch_assoc()) {
+        echo '<form action="modify.php" method="post">';
         echo '<div class="w3-row">';
-        echo '<div class="w3-col s4 m4 l4">'.$row["survey_id"].'</div>';
-        echo '<div class="w3-col s4 m4 l4">'.$row["reviewer_email"].'</div>';
-        echo '<div class="w3-col s4 m4 l4">'.$row["teammate_email"].'</div>';
+        echo '<div class="w3-col s3 m3 l3">'.$row["survey_id"].'</div>';
+        echo '<div class="w3-col s3 m3 l3">'.$row["reviewer_email"].'</div>';
+        echo '<div class="w3-col s3 m3 l3">'.$row["teammate_email"].'</div>';
+        echo "<input type='submit' class='w3-col s3 m3 l3' id='$i' name='re' value='Remove'>";
+        echo "<input type='hidden' name='id' value='$i'/>";
         echo '</div>';
+        echo '</form>';
+        $i = $i + 1;
       }
     } else {
       echo "0 results";
@@ -64,8 +76,7 @@
     <input type="text" id="lname" name="lname"><br><br>
     <label for="sname">Survey ID: </label>
     <input type="text" id="sname" name="sname"><br><br>
-    <input type="submit" id="add" name="add" value="Add">
-    <input type="submit" id="re" name="re" value="Remove">
+    <input type="submit" id="p" name="add" value="Add">
   </form>
 
 </div>
