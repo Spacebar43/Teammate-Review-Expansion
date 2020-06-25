@@ -68,7 +68,7 @@ $stmt->store_result();
 $stmt->fetch();
 if($stmt->num_rows == 0){
   echo '<script language="javascript">';
-  echo 'alert("Email was not found in the list of faculty. Please contact your professor.")';
+  echo 'alert("Email was not found in the list of faculty. Please contact a sysyem administrator.")';
   echo '</script>';
   $stmt->close();
   exit();
