@@ -38,13 +38,14 @@ hr {
 <header id="header" class="w3-container w3-theme w3-padding">
     <div id="headerContentName"><font class="w3-center w3-theme"><h1>Faculty Control Panel</h1></font></div>
 </header>
-
+<!-- Control Panel Directory -->
 <div>
   <form class="w3-container w3-card-4 w3-light-blue"
         method="post"
         name="adminControlPanel" id="adminControlPanel"
         enctype="multipart/form-data">
-
+    
+        <!-- Register Students -->
         <input type='button'
                onclick="window.location.href = 'createCourses.php';"
                class="w3-center w3-button w3-theme-dark"
@@ -55,6 +56,12 @@ hr {
                onclick="window.location.href = 'surveyCreation.php';"
                class="w3-center w3-button w3-theme-dark"
                value="Create Survey"/>
+    
+       <!-- Review Evaluations -->
+       <input type='button'
+              onclick="window.location.href = 'getEvals.php';"
+              class="w3-center w3-button w3-theme-dark"
+              value="Review Evals"/>
 
         <!-- Register Students -->
         <input type='button'
