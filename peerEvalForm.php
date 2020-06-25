@@ -79,18 +79,18 @@ if ( !empty($_POST) && isset($_POST)) {
 	$c=intval($_POST['Q3']);
 	$d=intval($_POST['Q4']);
 	$e=intval($_POST['Q5']);
-  //if scores don't exist
+    //if scores don't exist
 	if($student_scores[1] == -1){
         $stmt = $con->prepare('INSERT INTO scores (score1, score2, score3, score4, score5, eval_id) 
                                VALUES(?,?,?,?,?,?)');
         $stmt->bind_param('iiiiii',$a, $b,$c,$d,$e , $eval_ID);
         $stmt->execute();
-	 } else {
+	} else {
         $stmt = $con->prepare('UPDATE scores set score1=?, score2=?, score3=?, score4=?, score5=? 
                                WHERE eval_id=?');
         $stmt->bind_param('iiiiii',$a, $b,$c,$d,$e , $eval_ID);
         $stmt->execute();
-      }
+    }
 	$stmt = $con->prepare('SELECT score1, score2, score3, score4, score5 FROM scores WHERE eval_id=?');
 	$stmt->bind_param('i', $eval_ID);
 	$stmt->execute();
