@@ -35,7 +35,7 @@ hr {
     <h3>Please enter the Course Number and Name</h3>
     <div id="courseNumber" class="w3-section">
 	<hr>
-      <input maxlength="5" placeholder="442" name ='courseNumberEntryText' id="courseNumberEntryText" class="w3-input w3-light-grey" type="text" required>
+      <input placeholder="442" name ='courseNumberEntryText' id="courseNumberEntryText" class="w3-input w3-light-grey" type="text" required>
       <hr>
       <input placeholder="Intro to Software Engineering" name ='courseNameEntryText' id="courseNameEntryText" class="w3-input w3-light-grey" type="text" required>
       <hr>
@@ -76,7 +76,7 @@ hr {
   function addCourse ($connection, $courseNum, $courseName, $faculty_id) {
     echo "Added to database";
     $sql = $connection->prepare( 'INSERT INTO course (code,name,faculty_id) values(?,?,?)' );
-    $sql->bind_param('isi', $courseNum, $courseName, $faculty_id);
+    $sql->bind_param('ssi', $courseNum, $courseName, $faculty_id);
     $sql->execute();
   }
   //
