@@ -4,6 +4,7 @@ CREATE TABLE `course` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `code` text NOT NULL,
  `name` text NOT NULL,
+ 'faculty_id' int(11) NOT NULL,
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
