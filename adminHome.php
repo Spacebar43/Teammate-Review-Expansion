@@ -91,6 +91,12 @@ hr {
                onclick="window.location.href = 'surveyCreation.php';"
                class="w3-center w3-button w3-theme-dark"
                value="Create Survey"/></input>
+  
+        <!-- Get normalised survey results -->
+       <input type='button'
+              onclick="window.location.href = 'getNormResults.php';"
+              class="w3-center w3-button w3-theme-dark"
+              value="Get Normalised Survey Results"/>
 
   </form>
 </div>
