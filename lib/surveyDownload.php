@@ -3,7 +3,25 @@
     // TODO
 
     function get_norm_scores() {
-        // todo
+       
+        require "lib/database.php";
+
+        $conn = connectToDatabase();
+        // $sql = (SQL query here);
+        $result = $conn->query($sql);
+        $arr = array();
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+
+                array_push($arr, $row);
+            }
+       }
+        return $arr;
+        $conn->close();
+        
+    
     }
 
     function dl_norm_scores( $array ) {
