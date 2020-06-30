@@ -51,30 +51,33 @@ hr {
                class="w3-center w3-button w3-theme-dark"
                value="Create Courses"/>
 
-        <!--- Create Surveys --->
-        <input type='button'
-               onclick="window.location.href = 'surveyCreation.php';"
-               class="w3-center w3-button w3-theme-dark"
-               value="Create Survey"/>
-    
-       <!-- Review Evaluations -->
+
        <input type='button'
               onclick="window.location.href = 'getEvals.php';"
               class="w3-center w3-button w3-theme-dark"
               value="Review Evals"/>
 
-        <!-- Register Students -->
+        <!--- Create Surveys --->
         <input type='button'
-               onclick="window.location.href = 'studentRegistration.php';"
+               onclick="window.location.href = 'surveyCreation.php';"
                class="w3-center w3-button w3-theme-dark"
-               value="Register Students"/>
-               
-        <!-- Upload Review Pairings -->
+
+               value="Create Survey"/></input>
+
+        <input type='button'
+                onclick="window.location.href = 'review_modifier.php';"
+                class="w3-center w3-button w3-theme-dark"
+                value="Modify Reviewers"/></input>
+
+        <input type='button'
+                onclick="window.location.href = 'studentRegistration.php';"
+                class="w3-center w3-button w3-theme-dark"
+                value="Register Students"/></input>
+         
         <input type='button'
                onclick="window.location.href = 'reviewPairSelection.php';"
                class="w3-center w3-button w3-theme-dark"
                value="Upload Review Pairings"/>
-
 
   </form>
 </div>
