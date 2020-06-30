@@ -38,7 +38,7 @@ hr {
       <hr>
       <input type='submit' id="loginEmailEntryButton" class="w3-center w3-button w3-theme-dark" value='Get Verification Code'></input>
       <hr>
-      <input type='button' onclick="window.location.href = 'accessCodePage.php';" class="w3-center w3-button w3-theme-dark" value="Already have valid code?"/></input>
+      <input type='button' onclick="window.location.href = 'facultyAccessCodePage.php';" class="w3-center w3-button w3-theme-dark" value="Already have valid code?"/></input>
       <hr>
     </div>
   </form>
@@ -68,7 +68,7 @@ $stmt->store_result();
 $stmt->fetch();
 if($stmt->num_rows == 0){
   echo '<script language="javascript">';
-  echo 'alert("Email was not found in the list of faculty. Please contact a sysyem administrator.")';
+  echo 'alert("Email was not found in the list of faculty. Please contact a system administrator.")';
   echo '</script>';
   $stmt->close();
   exit();
@@ -101,7 +101,7 @@ $human_exp_time = $date->format('h:i a');
 mail($email,"Faculty Login Code", "<h1>Your code is: ".$code."</h1>
       <p>It will expire at ".$human_exp_time." EST</p>
       </hr>
-      Use it here: ".SITE_HOME."accessCodePage.php",
+      Use it here: ".SITE_HOME."facultyAccessCodePage.php",
       'Content-type: text/html; charset=utf-8\r\n'.
       'From: Teamwork Evaluation Access Code Generator <apache@buffalo.edu>');
     header("Location: facultyAccessCodePage.php"); /* Redirect browser to a test link*/
