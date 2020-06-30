@@ -7,5 +7,9 @@
     <input type='submit' name='submit' value='Send itttttttt'/>
 </form>
 
+<button type='button' onclick="window.location.replace('sqlinsert.php');">
+Go To sqlinsert.php
+</button>
+
 </body>
 </html>

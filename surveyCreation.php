@@ -41,16 +41,16 @@ hr {
 </div>
 <hr>
 
-
 <div id="createSurveyForm" class="w3-row-padding w3-center w3-padding">
   <form  id="newSurvey" class="w3-container w3-card-4 w3-light-blue" method='post'>
     <div id="courseNumber" class="w3-section">
         <h3>Enter the Course Number</h3>
-      <input maxlength="3" placeholder="341" name ='courseNumberEntryText' id="courseNumberEntryText" class="w3-input w3-light-grey" type="text" pattern="[0-9][0-9][0-9]$" required>
+      <input placeholder="341" name ='courseNumberEntryText' id="courseNumberEntryText" class="w3-input w3-light-grey" type="text" required>
       <hr>
-      <h3>Enter the Rubric Name</h3>
+      <!-- Code is used when we want users to be able to create their own question forms. -->
+      <!--<h3>Enter the Rubric Name</h3>
       <input placeholder="testrubric" name ='rubricEntryText' id="rubricEntryText" class="w3-input w3-light-grey" type="text" required>
-      <hr>
+      <hr> -->
         <h3>Enter the Start Date of Survey</h3>
       <input name ='startDateText' id="startDateText" class="w3-input w3-light-grey" type="date" required>
       <hr>
@@ -79,16 +79,16 @@ hr {
 
   session_start();
 
-  /*if(!isset($_SESSION['faculty_id'])) {
+  if(!isset($_SESSION['faculty_id'])) {
     header("Location: ".SITE_HOME."index.php");
     exit();
-  }*/
+  }
 
   require "lib/database.php";
   $con = connectToDatabase();
 
-  function addSurvey ($connection, $course_num, $start_date, $expiration_date, $rubric_name) {
-    echo "Finding rubric...";
+  function addSurvey ($connection, $course_num, $start_date, $expiration_date) {
+    /*echo "Finding rubric...";
     $rubricsql = $connection -> prepare('SELECT id FROM rubrics WHERE name=? limit 1');
     $rubricsql->bind_param('s', $rubric_name);
     $rubricsql->execute();
@@ -101,10 +101,11 @@ hr {
     }
     echo "Rubric exists, fetching...";
     $rubricsql->fetch();
+    */
     //Rubric ID acquired
-
+    $rubric_id = 1;
     $coursesql = $connection -> prepare('SELECT id FROM course WHERE code=? limit 1');
-    $coursesql->bind_param('i', $course_num);
+    $coursesql->bind_param('s', $course_num);
     $coursesql->execute();
     $coursesql->bind_result($course_id);
     $coursesql->store_result();
@@ -113,24 +114,24 @@ hr {
       $coursesql->close();
       exit();
     }
-    echo "Course exists, fetching...";
+    //echo "Course exists, fetching...";
     $coursesql->fetch();
 
 
     // now actual insertion
 
     $surveysql = $connection->prepare('INSERT INTO surveys(course_id,start_date,expiration_date,rubric_id) values (?,?,?,?)' );
-    $surveysql->bind_param('issi', $course_id, $start_date, $expiration_date, $rubric_id);
+    $surveysql->bind_param('sssi', $course_id, $start_date, $expiration_date, $rubric_id);
     $surveysql->execute();
     echo "Successfully created survey for course " . $course_num . " to go live on " . $start_date . " and expire on " . $expiration_date;
   }
-  if(!empty($_POST['courseNumberEntryText']) and !empty($_POST['startDateText']) and !empty($_POST['startDateTimeText']) and !empty($_POST['closeDateText'])and !empty($_POST['closeDateTimeText']) and !empty($_POST['rubricEntryText']) ) {
+  if(!empty($_POST['courseNumberEntryText']) and !empty($_POST['startDateText']) and !empty($_POST['startDateTimeText']) and !empty($_POST['closeDateText'])and !empty($_POST['closeDateTimeText']) ) {
     $course_number = $_POST['courseNumberEntryText'];
     $start_date = $_POST['startDateText'];
     $start_date_time_text = $_POST['startDateTimeText'];
     $close_date = $_POST['closeDateText'];
     $close_date_time_text = $_POST['closeDateTimeText'];
-    $rubric_name_input = $_POST['rubricEntryText'];
+    //$rubric_name_input = $_POST['rubricEntryText'];
     $open_date = $start_date . " " . $start_date_time_text;
     $closed_date = $close_date . " " . $close_date_time_text;
     $open_date_object = date_create_from_format('Y-m-d H:i', $open_date);
@@ -146,8 +147,8 @@ hr {
       //echo $current_time_object->format('Y-m-d H:i');
     }
     else if($closed_date_object > $open_date_object){
-      echo "Dates are valid, proceeding...";
-      addSurvey($con, $course_number, $open_date, $closed_date, $rubric_name_input);
+      //echo "Dates are valid, proceeding...";
+      addSurvey($con, $course_number, $open_date, $closed_date);
     }else{
       echo "Error: End date must occur after the survey start date";
     }

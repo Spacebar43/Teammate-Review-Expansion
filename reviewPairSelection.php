@@ -38,7 +38,6 @@ hr {
 <header id="header" class="w3-container w3-theme w3-padding">
     <div id="headerContentName"><font class="w3-center w3-theme"><h1>Faculty Control Panel</h1></font></div>
 </header>
-<!-- Control Panel Directory -->
 <div>
   <form class="w3-container w3-card-4 w3-light-blue"
         method="post"
@@ -47,41 +46,54 @@ hr {
     
         <!-- Register Students -->
         <input type='button'
-               onclick="window.location.href = 'createCourses.php';"
+               onclick="window.location.href = 'adminHome.php';"
                class="w3-center w3-button w3-theme-dark"
-               value="Create Courses"/>
-
-
-       <input type='button'
-              onclick="window.location.href = 'getEvals.php';"
-              class="w3-center w3-button w3-theme-dark"
-              value="Review Evals"/>
-
-        <!--- Create Surveys --->
-        <input type='button'
-               onclick="window.location.href = 'surveyCreation.php';"
-               class="w3-center w3-button w3-theme-dark"
-
-               value="Create Survey"/></input>
-
-        <input type='button'
-                onclick="window.location.href = 'review_modifier.php';"
-                class="w3-center w3-button w3-theme-dark"
-                value="Modify Reviewers"/></input>
-
-        <input type='button'
-                onclick="window.location.href = 'studentRegistration.php';"
-                class="w3-center w3-button w3-theme-dark"
-                value="Register Students"/></input>
-         
-        <input type='button'
-               onclick="window.location.href = 'reviewPairSelection.php';"
-               class="w3-center w3-button w3-theme-dark"
-               value="Upload Review Pairings"/>
+               value="Return Home"/>
 
   </form>
 </div>
+
+<div id="reviewPairs" class="w3-row-padding w3-center w3-padding">
+  <form  id="newSurvey" class="w3-container w3-card-4 w3-light-blue" method='post'>
+    <div id="courseNumber" class="w3-section">
+        <h3>Enter the Survey ID Number</h3>
+      <input placeholder="1" name ='surveyIDText' id="surveyIDText" class="w3-input w3-light-grey" type="text" pattern="[0-9]*" title="Numbers only" required>
+      <hr>
+      <input type='submit' id="confirmID" class="w3-center w3-button w3-theme-dark" value='Confirm Survey ID'></input>
+      <hr>
+    </div>
+  </form>
 <hr>
+
+
+<!-- Upload CSV -->
+<div class="w3-row-padding w3-center w3-padding">
+  <form class="w3-container w3-card-4 w3-light-blue"
+        action="assignment_upload.php"
+        method="post"
+        name="frmCSVImport" id="frmCSVImport"
+        enctype="multipart/form-data">
+
+    <div class="w3-section">
+         <label class="col-md-4 control-label">Choose CSV File</label>
+         <hr>
+         <input type="file"
+                name="file" id="file"
+                accept=".csv">
+         <button type="submit"
+                 name="Import" id="submit"
+                 class="btn-submit">Import</button>
+    </div>
+  </form>
+</div>
+
+<?php 
+if(!empty($_POST['surveyIDText']) ) {
+    $_SESSION['survey_id'] = $_POST['surveyIDText'];
+    echo "You have input " . $_POST['surveyIDText'] . " as the survey ID";
+}
+?>
+
 <!-- Footer -->
 <footer id="footer" class="w3-container w3-theme-dark w3-padding-16">
   <h3>Acknowledgements</h3>
