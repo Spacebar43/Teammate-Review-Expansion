@@ -1,4 +1,7 @@
 <?php
+
+
+
 error_reporting(-1); // reports all errors
 ini_set("display_errors", "1"); // shows all errors
 ini_set("log_errors", 1);
@@ -6,13 +9,16 @@ ini_set("error_log", "~/php-error.log");
 session_start();
 require "lib/database.php";
 $con = connectToDatabase();
-$surveyID = $_SESSION['surveyid'];
-try{
-if(!isset($surveyID)){
-    // No survey ID detected, put in an errorvalue.
-    $_SESSION['surveyid'] = 1;
-    $surveyID = $_SESSION['surveyid'];
+
+
+if(!isset($_SESSION['survey_id'])){
+    // No survey ID detected.
+    echo "<script type=\"text/javascript\">
+    alert (\"You did not input a survey ID\");
+    window.location = \"adminHome.php\"
+    </script>";
 }
+try{
 // TODO: Change "Import" to actual name of button handler.
     if(isset($_POST["Import"])){
         $filename=$_FILES["file"]["tmp_name"];
