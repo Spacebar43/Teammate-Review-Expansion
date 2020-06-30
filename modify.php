@@ -17,18 +17,33 @@ if(isset($_POST["add"])){
   $review = $_POST['fname'];
   $team = $_POST['lname'];
   $si = $_POST['sname'];
+  $sq = "SELECT id FROM course where code=?";
+  $st = $con->prepare($sq);
+  $st->bind_param('i', $si);
+  $st->execute();
+  $st->bind_result($resu);
+  $st->store_result();
+  $st->fetch();
+  $st->close();
+
+  $s = "SELECT id FROM surveys where course_id=?";
+  $sta = $con->prepare($s);
+  $sta->bind_param('i', $resu);
+  $sta->execute();
+  $sta->bind_result($surv);
+  $sta->store_result();
+  $sta->fetch();
+  $sta->close();
+
   try {
     $sql = $con->prepare('INSERT INTO reviewers (survey_id,reviewer_email,teammate_email) values (?,?,?)');
-    $sql->bind_param('iss', $si, $review, $team);
+    $sql->bind_param('iss', $surv, $review, $team);
     $sql->execute();
     echo "<script type=\"text/javascript\">
             window.location = \"review_modifier.php\"
             </script>";
   } catch (Exception $e){
-    echo "<script type=\"text/javascript\">
-            alert (\"Error adding review pair\");
-            window.location = \"review_modifier.php\"
-            </script>";
+    echo $e;
   }
 }
 
